@@ -4,6 +4,9 @@
 #include <queue>
 #include <iterator>
 #include <algorithm>
+
+#include <cstdint>  // LONG_MIN
+#include <limits>  // LONG_MIN
 using namespace std;
 
 // 前中后序 层次
@@ -202,6 +205,32 @@ BinaryNode<T>* Insert(BinaryNode<T> *root, char data) {
 	return root;
 }
 
+
+// https://www.cnblogs.com/grandyang/p/4298435.html
+// BST  左<根<右
+// 但是有的题目 会要求 左<=根<右
+template <class T, class T2 = int>
+bool isValidBST(BinaryNode<T> *root, T2 min, T2 max) {
+    if(!root) return true;
+    if(root->data <= min || root->data >= max) return false;
+    return isValidBST(root->left, min, root->data) && isValidBST(root->right, root->data, max);
+}
+
+// * &  传入指针的指针 (实际)
+// 如果只是指针可能会造成拷贝
+template <class T>
+bool isValidBST(BinaryNode<T> *root, BinaryNode<T>*& pre) {
+    if(!root) return true;
+
+	bool le = isValidBST(root->left, pre);
+    if(!le) return false;
+    if(pre) {
+        if(root->data <= pre->data) return false;
+    }
+    pre = root;
+	return isValidBST(root->right, pre);
+}
+
 // time complexity: O(n)
 // space complexity:
 //     O(h)
@@ -234,6 +263,11 @@ int main() {
 	cout<<"Levelorder: \n";
     LevelOrder(root); cout<<"\n";
     LevelOrderBottomUp(root); cout<<"\n";
+
+
+    cout << isValidBST(root, numeric_limits<char>::min(), numeric_limits<char>::max()) << endl;
+    BinaryNode<char>* pre = nullptr;
+    cout << isValidBST(root, pre) << endl;
 
     return 0;
 }
