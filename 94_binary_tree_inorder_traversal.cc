@@ -11,6 +11,19 @@ using namespace std;
 
 // 前中后序 层次
 // https://www.cnblogs.com/grandyang/p/4251757.html
+//
+/* 中序遍历可以知道根的左右是否存在子树,  层次/先序/后序 可以确定根的位置
+给定 先序+中序 or 后序+中序 可以唯一确定一颗二叉树
+而 先序+后序 不能
+	  A
+	 /
+	B
+前序遍历： AB, 后序遍历： BA
+	A
+	 \
+	  B
+前序遍历： AB, 后序遍历： BA
+*/
 
 template <class Comparable>
 struct BinaryNode {
@@ -74,8 +87,10 @@ void Inorder(BinaryNode<T> *root) {
 }
 
 // https://www.cnblogs.com/grandyang/p/4297300.html
+// https://www.cnblogs.com/grandyang/p/4620012.html  返回第k小的元素(二叉树中序)
 template <class T>
 void InorderNonRecursive(BinaryNode<T> *root) {
+    // int cnt = 0;
     stack<BinaryNode<T>*> st;
     auto cur = root;
     while (cur || !st.empty()) {
@@ -85,6 +100,8 @@ void InorderNonRecursive(BinaryNode<T> *root) {
         }
 
         cur = st.top(); st.pop();
+        // ++cnt;
+        // if(cnt == k) return cur->data;
         cout << cur->data << ' ';  // treat as root again, next root->right
         cur = cur->right;
     }
@@ -231,6 +248,29 @@ bool isValidBST(BinaryNode<T> *root, BinaryNode<T>*& pre) {
 	return isValidBST(root->right, pre);
 }
 
+template <class T>
+int count(BinaryNode<T>* node) {
+    if (!node) return 0;
+    return 1 + count(node->left) + count(node->right);
+}
+
+// @TODO
+// 如果BST增删十分频繁 求kth也频繁  怎么优化
+// https://www.cnblogs.com/grandyang/p/4620012.html  : 重新设计BST的结构
+// https://leetcode.com/problems/kth-smallest-element-in-a-bst/solution/  : 使用LRU
+template <class T>
+T kthSmallest(BinaryNode<T> *root, int k) {
+    // @fixme: should return invalid number, e.g. T==int, Return numeric_limits<long>::min()
+    if(!root) return {};
+    int cnt = count(root->left);
+	if(k <= cnt)
+		return kthSmallest(root->left, k);
+	else if(k > cnt+1)
+		return kthSmallest(root->right, k-cnt-1);
+	else
+        return root->data;
+}
+
 // time complexity: O(n)
 // space complexity:
 //     O(h)
@@ -269,5 +309,6 @@ int main() {
     BinaryNode<char>* pre = nullptr;
     cout << isValidBST(root, pre) << endl;
 
+    cout << "kth Smallest: " << kthSmallest(root, 7) << endl;
     return 0;
 }
