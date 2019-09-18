@@ -413,6 +413,15 @@ T kthSmallest(BinaryNode<T> *root, int k) {
         return root->data;
 }
 
+// Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
+// 问题是什么; 子问题是什么
+template <class T>
+T isSameBinaryTree(BinaryNode<T> *p, BinaryNode<T> *q) {
+    if (!p && !q) return true;
+    if ((p && !q) || (!p && q) || (p->val != q->val)) return false;
+    return isSameBinaryTree(p->left, q->left) && isSameBinaryTree(p->right, q->right);
+}
+
 // time complexity: O(n)
 // space complexity:
 //     O(h)
