@@ -3,13 +3,25 @@
 #include<vector>
 using namespace std;
 
+template <class Comparable>
+struct BinaryNode {
+    Comparable data;
+    BinaryNode *left;
+    BinaryNode *right;
+
+    BinaryNode( const Comparable& _data, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr )
+        : data{ _data }, left{ lt }, right{ rt } { }
+
+    BinaryNode( Comparable && _data, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr )
+        : data{ std::move( _data ) }, left{ lt }, right{ rt } { }
+};
+
 
 // @TODO
 // 遍历顺序构建树
 // 遍历顺序之间的转换
 
 // @SEE equal two containers  std::equal(...)
-
 vector<int> slice(const vector<int>& v, int a, int b) {
 	return vector<int>{v.begin()+a, v.begin()+b};
 	// 拷贝构造 实际的元素为 v.begin()+a, v.begin()+b-1
@@ -51,6 +63,38 @@ void printPreOrder(const vector<int>& postorder, const vector<int>& inorder){
 	printPreOrder(slice(postorder, 0, L), slice(inorder, 0, L));  // 左闭右开区间: 方便计算区间长度
 	printPreOrder(slice(postorder, L, N-1), slice(inorder, L+1, N));
 }
+
+
+// First keep pushing the node from preorder to the stack until the top of stack is equal to the inorder's element, which means it comes to an end of the left node, and then flag it and pop until the top of the stack is not equal to the inorder (pop out the left and root), next step is to append the next node from preorder to the current node's right, and reset the flag, and iterate again until it finish iterating the preorder array.
+template<class T>
+BinaryNode<T>* buildTreeRecursive(const vector<int>& preorder, const vector<int>& inorder) {
+    return buildTreeRecursive(preorder, inorder, 0, preorder.size()-1, 0, inorder.size()-1);
+}
+
+// 递归函数中ps+1操作 可能会超出 栈溢出
+// 终止条件: ps > pe; 直接返回 nullptr
+BinaryNode<T>* buildTreeRecursive(const vector<int>& preorder, const vector<int>& inorder, int ps, int pe, int is, int ie) {
+    if(ps > pe) return nullptr;
+    BinaryNode<T>* node = new BinaryNode<T>(preorder[ps]);
+    // 每一次递归都会遍历
+    int pos;
+    for(int i=is; i <= ie; i++) {
+        if(inorder[i] == node->data) {
+            pos = i;
+            break;
+        }
+    }
+    //                                                      po-is 就是左子树的个数
+    node->left = buildTreeRecursive(preorder, inorder, ps+1, ps+(pos-is), is, pos-1);
+    node->right = buildTreeRecursive(preorder, inorder, ps+(pos-is)+1, pe, pos+1, ie);
+    return node;
+}
+
+template<class T>
+BinaryNode<T>* buildTreeNonRecursive(const vector<int>& preorder, const vector<int>& inorder) {
+
+}
+
 
 int main() {
 	/* BST

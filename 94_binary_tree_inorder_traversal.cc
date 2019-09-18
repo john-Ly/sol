@@ -332,7 +332,6 @@ int count(BinaryNode<T>* node) {
     height of tree with 1 node = 0   w.r.t level
     height of empty tree = -1;
 */
-
 template <class T>
 int HeightofTree(BinaryNode<T> *root) {
     // height depth 的起始定义不同  depth会定义成0
@@ -413,13 +412,69 @@ T kthSmallest(BinaryNode<T> *root, int k) {
         return root->data;
 }
 
-// Two binary trees are considered the same if they are structurally identical and the nodes have the same value.
+// Two binary trees are considered the same:
+// they are structurally identical and the nodes have the same value.
 // 问题是什么; 子问题是什么
+// https://www.cnblogs.com/grandyang/p/4053384.html
 template <class T>
-T isSameBinaryTree(BinaryNode<T> *p, BinaryNode<T> *q) {
+bool isSameBinaryTree(BinaryNode<T> *p, BinaryNode<T> *q) {
     if (!p && !q) return true;
-    if ((p && !q) || (!p && q) || (p->val != q->val)) return false;
+    if ((p && !q) || (!p && q) || (p->data != q->data)) return false;
     return isSameBinaryTree(p->left, q->left) && isSameBinaryTree(p->right, q->right);
+}
+
+template <class T>
+bool isSameNonRecursive(BinaryNode<T> *p, BinaryNode<T> *q) {
+	if(!p && !q) return true;
+	queue<BinaryNode<T>*> Q1, Q2;
+	Q1.push(p);	Q2.push(q);
+	while(!Q1.empty() && !Q2.empty()) {
+        auto cur1 = Q1.front(); Q1.pop();
+        auto cur2 = Q2.front(); Q2.pop();
+        if(!cur1 && !cur2) continue;
+        if ((cur1 && !cur2) || (!cur1 && cur2) || (cur1->data != cur2->data)) return false;
+        Q1.push(cur1->left);
+        Q1.push(cur1->right);
+        Q2.push(cur2->left);
+        Q2.push(cur2->right);
+	}
+    return true;
+}
+
+// https://www.cnblogs.com/grandyang/p/4051715.html
+template <class T>
+T isSymmetricBinaryTree(BinaryNode<T> *p, BinaryNode<T> *q) {
+    if (!p && !q) return true;
+    if ((p && !q) || (!p && q) || (p->data != q->data)) return false;
+    // diff with isSame()
+    return isSymmetricBinaryTree(p->left, q->right) && isSymmetricBinaryTree(p->right, q->left);
+}
+
+// 判断是否对称
+template <class T>
+bool isSymmetric(BinaryNode<T> *root) {
+    if (!root) return true;
+    return isSymmetricBinaryTree(root->left, root->right);
+}
+
+template <class T>
+bool isSymmetricNonRecursive(BinaryNode<T> *root) {
+	if(!root) return true;
+	queue<BinaryNode<T>*> Q1, Q2;
+	Q1.push(root->left);
+	Q2.push(root->right);
+    // 不同于levelOrder
+	while(!Q1.empty() && !Q2.empty()) {
+        auto cur1 = Q1.front(); Q1.pop();
+        auto cur2 = Q2.front(); Q2.pop();
+        if(!cur1 && !cur2) continue;
+        if ((cur1 && !cur2) || (!cur1 && cur2) || (cur1->data != cur2->data)) return false;
+        Q1.push(cur1->left);
+        Q1.push(cur1->right);
+        Q2.push(cur2->right);
+        Q2.push(cur2->left);
+	}
+    return true;
 }
 
 // time complexity: O(n)
