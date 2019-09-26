@@ -7,6 +7,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+// https://www.cnblogs.com/grandyang/p/4254860.html
 // @TODO 不带头节点的头插法
 void reorderList(ListNode* head) {
     // 只有两个节点的情况

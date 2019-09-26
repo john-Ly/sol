@@ -477,6 +477,58 @@ bool isSymmetricNonRecursive(BinaryNode<T> *root) {
     return true;
 }
 
+// https://www.cnblogs.com/grandyang/p/4295245.html
+// 想到利用AVL树 平衡的性质 但是太难了
+template <class T>
+BinaryNode<T>* sortedArrayToBST(vector<T>& nums, size_t lo, size_t hi) {
+    if(lo >= hi) return nullptr;
+    auto mid = (hi-lo)/2 + lo;
+    BinaryNode<T> * root = new BinaryNode<T>(nums[mid]);
+    root->left = sortedArrayToBST(nums, lo, mid);
+    root->right = sortedArrayToBST(nums, mid+1, hi);
+    return root;
+}
+
+
+namespace {
+    template<class T>
+    struct ListNode {
+        T val;
+        ListNode *next;
+        ListNode(T x) : val(x), next(nullptr) {}
+    };
+}
+
+
+// https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/
+// 递归版本的时间复杂度 (数组)  值得复习
+// 方法二: 将链表转换成数组 这样不用每次计算中间节点
+template <class T>
+BinaryNode<T>* sortedListToBST(ListNode<T>* head) {
+    if (!head) return nullptr;            // 无节点
+    if (!head->next) return new BinaryNode<T>{head->val};  // 只有一个节点
+    auto fast = head, slow = head;
+    auto last = slow;
+    while(fast->next && fast->next->next) {
+        last = slow;
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    // 可以认为slow处于中点处, 断开链表
+    fast = slow->next;
+    last->next = nullptr;
+
+    BinaryNode<T> * root = new BinaryNode<T>(slow->val);
+    if(slow != head)
+        root->left = sortedListToBST(head);
+    root->right = sortedListToBST(fast);
+    return root;
+}
+
+// 方法三:
+// 类似有序数组的方法 同样使用递归 但是每次只处理当前根节点(不需要计算mid)
+// 思想是使用中序遍历 函数调用的顺序被改变了
+
 // time complexity: O(n)
 // space complexity:
 //     O(h)
@@ -550,6 +602,12 @@ int main() {
         auto t2 = minDepth2(root);
         assert(t1 == t2);
         cout << t1 <<"\n";
+    }
+    {
+        vector<int> inorder{9, 10, 12, 16, 27, 36, 54, 72};
+        auto root = sortedArrayToBST(inorder, 0, inorder.size());
+        cout<<"sorted vec to BST \n";
+        Inorder(root); cout<<"\n";
     }
 
     return 0;
