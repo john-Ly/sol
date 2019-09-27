@@ -339,6 +339,36 @@ int HeightofTree(BinaryNode<T> *root) {
 	return max(HeightofTree(root->left), HeightofTree(root->right)) + 1;
 }
 
+// 该函数应该不能用来计算树高度
+template <class T>
+int HeightofTree_DFS(BinaryNode<T> *root) {
+	if(!root) return 0;
+    auto lHeight = HeightofTree_DFS(root->left);
+    if(lHeight == -1) return -1;
+    auto rHeight = HeightofTree_DFS(root->right);
+    if(rHeight == -1) return -1;
+    if(lHeight - rHeight > 1 || lHeight - rHeight < -1) return -1;
+	return max(lHeight, rHeight) + 1;
+}
+
+// https://leetcode.com/problems/balanced-binary-tree/discuss/35691/The-bottom-up-O(N)-solution-would-be-better
+// 1.top down
+template <class T>
+bool isBalanced(BinaryNode<T> *root) {
+    // height depth 的起始定义不同  depth会定义成0
+	if(!root) return true;
+    auto tmp = HeightofTree(root->left) - HeightofTree(root->right);
+    if(tmp > 1 || tmp < -1) return false;
+	return isBalanced(root->left) && isBalanced(root->right);
+}
+
+// 2. bottom up
+template <class T>
+bool isBalanced(BinaryNode<T> *root) {
+    return HeightofTree_DFS(root) != -1;
+}
+
+
 // 层次遍历的层数即是maxDepth
 template <class T>
 int maxDepth(BinaryNode<T> *root) {
@@ -489,7 +519,6 @@ BinaryNode<T>* sortedArrayToBST(vector<T>& nums, size_t lo, size_t hi) {
     return root;
 }
 
-
 namespace {
     template<class T>
     struct ListNode {
@@ -498,7 +527,6 @@ namespace {
         ListNode(T x) : val(x), next(nullptr) {}
     };
 }
-
 
 // https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/
 // 递归版本的时间复杂度 (数组)  值得复习
@@ -528,6 +556,70 @@ BinaryNode<T>* sortedListToBST(ListNode<T>* head) {
 // 方法三:
 // 类似有序数组的方法 同样使用递归 但是每次只处理当前根节点(不需要计算mid)
 // 思想是使用中序遍历 函数调用的顺序被改变了
+
+
+// 分解子问题
+//  hasPathSum(root, sum) = 从root出发, 是否有一条路径上的节点和等于sum
+//  hasPathSum(root, sum) = root->data + root->left or root->right是否有一条路径节点等于sum-root->data
+template <class T>
+bool hasPathSum(BinaryNode<T>* root, T sum) {
+    // 初始部分
+    if (!root) return false;            // 无节点
+    if (root->data == sum && !root->left && !root->right) return true; // 只有一个节点
+    return hasPathSum(root->left, sum - root->data) || hasPathSum(root->right, sum - root->data);
+}
+
+// 找到所有可能的路径
+// 可以理解为一个棋盘
+// @TODO DFS + DP
+template <class T>
+vector<vector<T>> PathSum(BinaryNode<T>* root, T sum) {
+    vector<vector<T> > paths;
+    vector<T> path;
+    findPaths(root, sum, path, paths);
+    return paths;
+}
+
+template <class T>
+void findPaths(BinaryNode<T>* root, T sum, vector<T>& path, vector<vector<T> > paths) {
+    // 到达最后一行 即叶子节点
+    if(!root) return;
+    // 回溯算法
+    path.push_back(root->data);
+    // 找到了完整的路径
+    if (!(root->left) && !(root->right) && sum == root->val)
+        paths.push_back(path);
+    findPaths(root->left, sum - root->data, path, paths);
+    findPaths(root->right, sum - root->data, path, paths);
+    path.pop_back();
+}
+
+// https://www.cnblogs.com/grandyang/p/4293853.html
+// 二叉树 按照前序的方式 生成链表
+template <class T>
+void flatten(BinaryNode<T>* root) {
+    // 异常
+    if(!root) return;
+
+    // 递归到左右子树
+    if(root->left) flatten(root->left);
+    if(root->right) flatten(root->right);
+
+    // 左右子树都完成flatten操作后
+    /*
+            root          root
+            /   \         /  \
+         left  right    nul   left
+                                 \
+                                 right
+     */
+    BinaryNode<T>* tmp = root->right;
+    root->right = root->left;
+    root->left = nullptr;
+    while(root->right) root=root->right;
+    root->right = tmp;
+}
+
 
 // time complexity: O(n)
 // space complexity:
