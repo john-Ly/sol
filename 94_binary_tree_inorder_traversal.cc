@@ -712,7 +712,7 @@ void findPaths(BinaryNode<T>* root, T sum, vector<T>& path, vector<vector<T> > p
 }
 
 // https://www.cnblogs.com/grandyang/p/4293853.html
-// 二叉树 按照前序的方式 生成链表
+// 二叉树 按照前序的方式 生成链表(bottom up)
 template <class T>
 void flatten(BinaryNode<T>* root) {
     // 异常
@@ -735,6 +735,26 @@ void flatten(BinaryNode<T>* root) {
     root->left = nullptr;
     while(root->right) root=root->right;
     root->right = tmp;
+}
+
+//https://leetcode.com/problems/flatten-binary-tree-to-linked-list/discuss/37010/Share-my-simple-NON-recursive-solution-O(1)-space-complexity!
+// 的确利用了 morris的方法 找到根节点的的前驱节点
+template <class T>
+void flatten_morris(BinaryNode<T> *root) {
+    if (!root) return;
+    auto cur = root;
+    while (cur) {
+        if (cur->left) {  // 左子树存在
+            auto pre = cur->left;
+            //  找到cur节点的左子树的最右的节点
+            while (pre->right) pre = pre->right;
+            pre->right = cur->right;
+            cur->right = cur->left;
+            cur->left = nullptr;
+        }
+        cur = cur->right;
+    }
+    return res;
 }
 
 int main() {
