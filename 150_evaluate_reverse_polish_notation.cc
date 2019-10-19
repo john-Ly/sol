@@ -37,6 +37,10 @@ void reverseString(char *C, int n) {
     for(int i=0; i<n; i++){ C[i] = S.top(); S.pop(); }
 }
 
+void reverseString(vector<char>& s) {
+    for(int i = 0; i < s.size() / 2; i++) swap(s[i], s[s.size() - i - 1]);
+}
+
 /*
 time complexity: O(n)
 space complexity: O(n)
