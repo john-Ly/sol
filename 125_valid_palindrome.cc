@@ -3,6 +3,18 @@
 #include <iostream>
 using namespace std;
 
+/*  回文字符串的判断 BinaryPredicate(可以自定义比较)
+ hash 表不能用于判断 因为hash bucket里面的内容可能不同
+ 
+#include <algorithm>
+bool is_palindrome(const std::string& s) { return std::equal(s.begin(), s.begin() + s.size()/2, s.rbegin()); }
+
+int main() {
+    test("radar");
+    test("hello");
+}
+*/
+
 // 0-9: [48, 57]    '0' 和 'P'之间相差32所以 会造成错误
 // A-Z: [65, 90]
 // a-z: i97, 122]
