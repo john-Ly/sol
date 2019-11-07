@@ -1,0 +1,205 @@
+* query:
+** numeric algo
+count(range, value)
+count_if(range, UnaryPredicate)   : [](const T& value) -> bool
+                                       
+ <numeric>
+accmulate(range, init_value)
+accmulate(range, init_value, BinaryOp)
+   : Init fun(const Type1 &init, const Type2 &b);
+     类型同init(使用了move语义)        类型是迭代器同能够dereference
+
+** query a property on a range -> bool
+all_of (range, UnaryPredicate)      针对每个元素
+any_of
+none_of
+
+** query a property on 2 ranges -> bool
+equal(range1, first2, [BinaryPredicate]->bool)
+equal(range1, first2, last2, [BinaryPredicate]->bool)   返回元素个数和符合某种predicate
+
+注: is_permutation()  类似equal 但是不考虑顺序
+
+lexicographical_compare()  但是比较两个range 那个更小(按照字典序或者自定义的比较Comp)
+
+mismatch() 遍历两个range 返回一个pair(Iter1, Iter2) 分别指向两者差异的元素(迭代器)
+** search a value
+*** container non-sorted(iterative)
+返回第一个
+Iter find(range, value)
+Iter find_if(range, UnaryPredicate)       predicate = true
+Iter find_if_not(range, UnaryPredicate)   predicate = false 
+
+还是比较实用的
+adjacent_find (range, BinaryPredicate)   找到连续相等的两个 返回第一个的iter
+或者(第一个和第二个 满足prediacate)
+*** container sorted
+有序的range
+因为相同的元素实际上已经紧邻 所以查找往往是查找一个sub-range
+
+pair(Iter1, Iter2) equal_range(range, value, [comp]->)  comp自定义range按照何种排序
+
+lower_bound
+upper_bound
+bool binary_search
+** search a range in (big) range
+Iter search(range1, range2, [BinaryPredicate]->bool)  好像使用的是朴素查找
+返回第一个sub-range的第一个字符的Iter
+
+c++17 引入了kmp之类的字符串查找算法
+
+Iter find_end(range1, range2, [BinaryPredicate]->bool) 同search 找到最后一个匹配的sub-range 
+** search a relative value
+min_element
+max_element
+
+* algos on sets
+set: sorted container( std::set is also)
+差集 并集 交集 包含 对称差集
+
+* movers
+std::copy(range, d_first)  顺序固定
+d_first 如果在range内部 行为为定义 + 使用copy_backward
+
+std::copy_if(range, d_first, UnaryPredicate) 
+
+std::copy_backward(range, d_last);
+从range的最后一个开始拷贝到d_last 
+d_last如果在range里面 行为未定义
+
+对应std::move
+* value modifier
+
+std::fill(range, value)  对range内进行value 的赋值
+std::generate(range, f)  对range内进行的赋值 f的返回值
+std::iota(range, 42) 生成以起始值开始的自然数序列 ++value
+42, 43, 44 ... 
+
+std::replace(range, old, new) 替换成new
+std::replace(range, UnaryPredicate, new) 满足条件替换成new
+
+* structure changes
+std::remove(range, value)
+STL算法操作的只是容器的迭代器 不会修改容器本身 所以只是把删除的元素放置到容器的最后
+
+container.erase( std::remove(range, value), end()  )
+
+
+删除空格
+std::unique(range, BinaryPredicate) 删除连续相同的元素 只保留第一个
+* transform
+trasform(range, std::back_inserter(results), f)
+for each x in range, f(x) output into results
+
+for_each(range, f) 
+side effects: f return void
+
+* raw memory
+fill                            uninitialzed_fill
+copy  -->  涉及到operator=      uninitialzed_copy  --> ctor
+move                            uninitialzed_move 
+* heap
+is_heap(range)
+
+make_heap(range) 默认最大堆
+sort_heap(range)  把最大堆转化成sorted range
+
+pop_heap(range) 最大堆移动到最后一个
+push_heap()
+
+** sort @TODO
+时间复杂度 各种排序算法的稳定性 
+*** std::sort(range) 
+保证复杂度在O(nlgn)  (先采用quicksort 到了2*lgN 次递归还没拍好序, 就使用heap_sort, 最后一趟使用插入排序)
+插入排序虽然平均时间复杂度在O(n^2) 但是对于几乎拍好序的range 优于快排
+
+无论range中的元素多少
+*** std::stable_sort(range)
+*** partial_sort(first, middle, last) 保证[first, middle) 是sorted
+建议 排序小范围的数据  使用partial_sort
+partial_sort() 保证时间复杂度在 O(nlg k)
+使用heap_sort
+
+*** inplace_merge(first, middle, last)  合并排序[first, middle) 和[middle, last)  合并成 [first, last)
+尝试申请内存 失败采用低效的算法
+
+#include <vector>
+#include <iostream>
+#include <algorithm>
+ 
+template<class Iter>
+void merge_sort(Iter first, Iter last)
+{
+    if (last - first > 1) {
+        Iter middle = first + (last - first) / 2;
+        merge_sort(first, middle);
+        merge_sort(middle, last);
+        std::inplace_merge(first, middle, last);
+    }
+}
+ 
+int main() {
+    std::vector<int> v{8, 2, -2, 0, 11, 11, 1, 7, 3};
+    merge_sort(v.begin(), v.end());
+}
+
+
+*** nth_element(begin, nth, end) nth 可以查找中位数
+保证O(N)的复杂度 不会收到K的影响
+2*lgN quickselect 递归 + heapselect
+利用快排进行 左边和右边满足大小关系 但是顺序不定
+
+inserter : set
+back_inserter push_back 同理front_inserter
+
+* partition
+完全使用二分法进行分区
+#include <algorithm>
+#include <iostream>
+#include <iterator>
+#include <vector>
+#include <forward_list>
+ 
+template <class ForwardIt>
+ void quicksort(ForwardIt first, ForwardIt last)
+ {
+    if(first == last) return;
+    auto pivot = *std::next(first, std::distance(first,last)/2);
+    ForwardIt middle1 = std::partition(first, last, 
+                         [pivot](const auto& em){ return em < pivot; });
+    ForwardIt middle2 = std::partition(middle1, last, 
+                         [pivot](const auto& em){ return !(pivot < em); });
+    quicksort(first, middle1);
+    quicksort(middle2, last);
+ }
+ 
+int main()
+{
+    std::vector<int> v = {0,1,2,3,4,5,6,7,8,9};
+    std::cout << "Original vector:\n    ";
+    for(int elem : v) std::cout << elem << ' ';
+ 
+    auto it = std::partition(v.begin(), v.end(), [](int i){return i % 2 == 0;});
+ 
+    std::cout << "\nPartitioned vector:\n    ";
+    std::copy(std::begin(v), it, std::ostream_iterator<int>(std::cout, " "));
+    std::cout << " * ";
+    std::copy(it, std::end(v), std::ostream_iterator<int>(std::cout, " "));
+ 
+    std::forward_list<int> fl = {1, 30, -4, 3, 5, -4, 1, 6, -8, 2, -5, 64, 1, 92};
+    std::cout << "\nUnsorted list:\n    ";
+    for(int n : fl) std::cout << n << ' ';
+    std::cout << '\n';  
+ 
+    quicksort(std::begin(fl), std::end(fl));
+    std::cout << "Sorted using quicksort:\n    ";
+    for(int fi : fl) std::cout << fi << ' ';
+    std::cout << '\n';
+}
+
+* permutation
+rotate(first, new_first, last)  默认左移
+shufle(range)
+next_permutation(range)
+
+
