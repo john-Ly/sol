@@ -1,0 +1,822 @@
+Solvable? 1
+Path length:         0
+Maximum heap size:   1
+Vertices searched:   1
+-----------------------------------------------------------
+Solvable? 1
+	3	2	
+8	7	1	
+4	5	6	
+
+Path length:         24
+Maximum heap size:   1501
+Vertices searched:   2751
+-----------------------------------------------------------
+Solvable? 1
+1	6	2	
+8	3	4	
+5		7	
+
+Path length:         23
+Maximum heap size:   893
+Vertices searched:   1519
+-----------------------------------------------------------
+7		3	
+2	5	1	
+4	8	6	
+
+Path length:         19
+Maximum heap size:   313
+Vertices searched:   508
+-----------------------------------------------------------
+4	3	5	
+6	2	8	
+	1	7	
+
+Path length:         22
+Maximum heap size:   386
+Vertices searched:   623
+-----------------------------------------------------------
+4	6	2	
+5		1	
+3	7	8	
+
+Path length:         18
+Maximum heap size:   91
+Vertices searched:   145
+-----------------------------------------------------------
+8	1	4	
+2	7	6	
+	3	5	
+
+Path length:         26
+Maximum heap size:   1554
+Vertices searched:   2821
+-----------------------------------------------------------
+6	4	5	
+	7	8	
+1	3	2	
+
+Path length:         27
+Maximum heap size:   1926
+Vertices searched:   3435
+-----------------------------------------------------------
+2	3		
+8	7	4	
+6	1	5	
+
+Path length:         18
+Maximum heap size:   45
+Vertices searched:   70
+-----------------------------------------------------------
+6	4	8	
+2	1		
+5	7	3	
+
+Path length:         23
+Maximum heap size:   386
+Vertices searched:   637
+-----------------------------------------------------------
+2	8	5	
+7	1	4	
+6	3		
+
+Path length:         20
+Maximum heap size:   127
+Vertices searched:   185
+-----------------------------------------------------------
+8	4	6	
+2	3		
+5	7	1	
+
+Path length:         25
+Maximum heap size:   1302
+Vertices searched:   2292
+-----------------------------------------------------------
+7	3	1	
+8	6	5	
+4	2		
+
+Path length:         22
+Maximum heap size:   479
+Vertices searched:   829
+-----------------------------------------------------------
+7	5	4	
+3	8	2	
+6	1		
+
+Path length:         28
+Maximum heap size:   1987
+Vertices searched:   3507
+-----------------------------------------------------------
+6	1	8	
+4	3	5	
+2		7	
+
+Path length:         19
+Maximum heap size:   59
+Vertices searched:   96
+-----------------------------------------------------------
+7		2	
+8	3	1	
+5	4	6	
+
+Path length:         23
+Maximum heap size:   902
+Vertices searched:   1559
+-----------------------------------------------------------
+6	1	2	
+8	7	4	
+5		3	
+
+Path length:         21
+Maximum heap size:   323
+Vertices searched:   526
+-----------------------------------------------------------
+7	3		
+4	8	5	
+2	6	1	
+
+Path length:         22
+Maximum heap size:   321
+Vertices searched:   545
+-----------------------------------------------------------
+3	2	1	
+4	7	8	
+6	5		
+
+Path length:         22
+Maximum heap size:   456
+Vertices searched:   800
+-----------------------------------------------------------
+8	4	5	
+	3	6	
+7	2	1	
+
+Path length:         25
+Maximum heap size:   1411
+Vertices searched:   2566
+-----------------------------------------------------------
+	4	7	
+5	6	2	
+3	1	8	
+
+Path length:         24
+Maximum heap size:   247
+Vertices searched:   441
+-----------------------------------------------------------
+8	1	7	
+6	4		
+3	5	2	
+
+Path length:         25
+Maximum heap size:   221
+Vertices searched:   354
+-----------------------------------------------------------
+2	4	3	
+7	5		
+6	8	1	
+
+Path length:         19
+Maximum heap size:   184
+Vertices searched:   297
+-----------------------------------------------------------
+3		2	
+7	6	4	
+5	1	8	
+
+Path length:         17
+Maximum heap size:   58
+Vertices searched:   86
+-----------------------------------------------------------
+4	7	6	
+1	5		
+8	2	3	
+
+Path length:         27
+Maximum heap size:   3939
+Vertices searched:   7969
+-----------------------------------------------------------
+4	5	7	
+1		8	
+6	3	2	
+
+Path length:         24
+Maximum heap size:   486
+Vertices searched:   846
+-----------------------------------------------------------
+8	1	2	
+6	4		
+5	3	7	
+
+Path length:         23
+Maximum heap size:   399
+Vertices searched:   630
+-----------------------------------------------------------
+1	2	8	
+5	4	6	
+7		3	
+
+Path length:         21
+Maximum heap size:   454
+Vertices searched:   753
+-----------------------------------------------------------
+1	6	4	
+7	3	8	
+2	5		
+
+Path length:         18
+Maximum heap size:   105
+Vertices searched:   174
+-----------------------------------------------------------
+1	8	5	
+	4	6	
+7	3	2	
+
+Path length:         15
+Maximum heap size:   46
+Vertices searched:   68
+-----------------------------------------------------------
+2	5	6	
+	3	1	
+4	7	8	
+
+Path length:         15
+Maximum heap size:   63
+Vertices searched:   89
+-----------------------------------------------------------
+	4	8	
+1	3	7	
+5	2	6	
+
+Path length:         24
+Maximum heap size:   917
+Vertices searched:   1590
+-----------------------------------------------------------
+3	2	4	
+	8	1	
+7	5	6	
+
+Path length:         23
+Maximum heap size:   814
+Vertices searched:   1413
+-----------------------------------------------------------
+8	1	4	
+7	3	6	
+2	5		
+
+Path length:         24
+Maximum heap size:   775
+Vertices searched:   1306
+-----------------------------------------------------------
+6	4	5	
+8	3	7	
+2	1		
+
+Path length:         26
+Maximum heap size:   1167
+Vertices searched:   2091
+-----------------------------------------------------------
+1	7	6	
+3		2	
+5	8	4	
+
+Path length:         22
+Maximum heap size:   590
+Vertices searched:   1026
+-----------------------------------------------------------
+5	4	8	
+6	3		
+7	2	1	
+
+Path length:         23
+Maximum heap size:   337
+Vertices searched:   557
+-----------------------------------------------------------
+2	5	3	
+8	7	1	
+	4	6	
+
+Path length:         18
+Maximum heap size:   184
+Vertices searched:   320
+-----------------------------------------------------------
+	1	7	
+3	8	6	
+2	5	4	
+
+Path length:         26
+Maximum heap size:   1266
+Vertices searched:   2220
+-----------------------------------------------------------
+6	2	5	
+4	7	8	
+3	1		
+
+Path length:         26
+Maximum heap size:   1391
+Vertices searched:   2438
+-----------------------------------------------------------
+7	3	8	
+4	5	6	
+2		1	
+
+Path length:         27
+Maximum heap size:   1841
+Vertices searched:   3415
+-----------------------------------------------------------
+7	2	4	
+5	6	3	
+1		8	
+
+Path length:         17
+Maximum heap size:   72
+Vertices searched:   106
+-----------------------------------------------------------
+4	7	8	
+	6	2	
+1	3	5	
+
+Path length:         27
+Maximum heap size:   1673
+Vertices searched:   2964
+-----------------------------------------------------------
+4	1	3	
+8	5	7	
+6	2		
+
+Path length:         18
+Maximum heap size:   139
+Vertices searched:   234
+-----------------------------------------------------------
+8	3	6	
+7	1	4	
+2		5	
+
+Path length:         21
+Maximum heap size:   317
+Vertices searched:   513
+-----------------------------------------------------------
+8	5	2	
+4	1	6	
+	7	3	
+
+Path length:         20
+Maximum heap size:   305
+Vertices searched:   507
+-----------------------------------------------------------
+6	5	7	
+	1	3	
+2	4	8	
+
+Path length:         23
+Maximum heap size:   635
+Vertices searched:   1070
+-----------------------------------------------------------
+	5	4	
+3	7	1	
+6	8	2	
+
+Path length:         24
+Maximum heap size:   507
+Vertices searched:   883
+-----------------------------------------------------------
+8	6	3	
+2	1	4	
+	7	5	
+
+Path length:         24
+Maximum heap size:   1242
+Vertices searched:   2188
+-----------------------------------------------------------
+2	7	6	
+8		4	
+5	1	3	
+
+Path length:         24
+Maximum heap size:   994
+Vertices searched:   1801
+-----------------------------------------------------------
+	6	5	
+4	7	1	
+2	8	3	
+
+Path length:         24
+Maximum heap size:   936
+Vertices searched:   1586
+-----------------------------------------------------------
+1	6	7	
+3	8		
+4	5	2	
+
+Path length:         23
+Maximum heap size:   494
+Vertices searched:   847
+-----------------------------------------------------------
+	2	3	
+1	6	5	
+7	4	8	
+
+Path length:         14
+Maximum heap size:   65
+Vertices searched:   92
+-----------------------------------------------------------
+7	5	2	
+	3	1	
+8	4	6	
+
+Path length:         19
+Maximum heap size:   193
+Vertices searched:   297
+-----------------------------------------------------------
+3	5	1	
+6	2	8	
+7	4		
+
+Path length:         26
+Maximum heap size:   1888
+Vertices searched:   3421
+-----------------------------------------------------------
+6	1	4	
+5	7	3	
+2	8		
+
+Path length:         20
+Maximum heap size:   144
+Vertices searched:   227
+-----------------------------------------------------------
+4	2	8	
+3	1	7	
+5	6		
+
+Path length:         20
+Maximum heap size:   93
+Vertices searched:   152
+-----------------------------------------------------------
+6	8	4	
+	3	5	
+7	1	2	
+
+Path length:         23
+Maximum heap size:   234
+Vertices searched:   384
+-----------------------------------------------------------
+7	5		
+6	3	2	
+1	8	4	
+
+Path length:         26
+Maximum heap size:   1794
+Vertices searched:   3164
+-----------------------------------------------------------
+6	3		
+5	1	7	
+8	2	4	
+
+Path length:         22
+Maximum heap size:   331
+Vertices searched:   549
+-----------------------------------------------------------
+	6	5	
+4	3	1	
+8	2	7	
+
+Path length:         26
+Maximum heap size:   1568
+Vertices searched:   2789
+-----------------------------------------------------------
+1	3	5	
+7	4	8	
+6		2	
+
+Path length:         13
+Maximum heap size:   22
+Vertices searched:   28
+-----------------------------------------------------------
+8	1	5	
+4	7		
+3	2	6	
+
+Path length:         25
+Maximum heap size:   795
+Vertices searched:   1337
+-----------------------------------------------------------
+2	7	3	
+	6	4	
+5	1	8	
+
+Path length:         21
+Maximum heap size:   246
+Vertices searched:   376
+-----------------------------------------------------------
+8	3	1	
+4	6	2	
+	5	7	
+
+Path length:         22
+Maximum heap size:   330
+Vertices searched:   539
+-----------------------------------------------------------
+5	8		
+7	1	6	
+2	3	4	
+
+Path length:         26
+Maximum heap size:   1348
+Vertices searched:   2335
+-----------------------------------------------------------
+2	8	7	
+4		5	
+1	3	6	
+
+Path length:         24
+Maximum heap size:   961
+Vertices searched:   1776
+-----------------------------------------------------------
+	4	6	
+5	3	1	
+2	7	8	
+
+Path length:         16
+Maximum heap size:   39
+Vertices searched:   61
+-----------------------------------------------------------
+5	1	4	
+2		7	
+3	6	8	
+
+Path length:         28
+Maximum heap size:   3485
+Vertices searched:   6453
+-----------------------------------------------------------
+4	5	8	
+3	1	6	
+2	7		
+
+Path length:         22
+Maximum heap size:   212
+Vertices searched:   347
+-----------------------------------------------------------
+3		2	
+8	5	6	
+4	7	1	
+
+Path length:         25
+Maximum heap size:   1008
+Vertices searched:   1795
+-----------------------------------------------------------
+1	4		
+2	7	3	
+8	6	5	
+
+Path length:         18
+Maximum heap size:   168
+Vertices searched:   278
+-----------------------------------------------------------
+4	8	7	
+1	3	5	
+2	6		
+
+Path length:         26
+Maximum heap size:   957
+Vertices searched:   1650
+-----------------------------------------------------------
+5	1		
+8	7	2	
+4	3	6	
+
+Path length:         22
+Maximum heap size:   456
+Vertices searched:   763
+-----------------------------------------------------------
+6	7	1	
+3		5	
+8	4	2	
+
+Path length:         26
+Maximum heap size:   1665
+Vertices searched:   2939
+-----------------------------------------------------------
+3	1	4	
+5		7	
+6	8	2	
+
+Path length:         26
+Maximum heap size:   973
+Vertices searched:   1632
+-----------------------------------------------------------
+7	8	1	
+5	4	3	
+2		6	
+
+Path length:         21
+Maximum heap size:   230
+Vertices searched:   348
+-----------------------------------------------------------
+2	4		
+3	7	5	
+8	1	6	
+
+Path length:         22
+Maximum heap size:   223
+Vertices searched:   373
+-----------------------------------------------------------
+6	5	3	
+7	2	1	
+	8	4	
+
+Path length:         24
+Maximum heap size:   1118
+Vertices searched:   1995
+-----------------------------------------------------------
+8		2	
+1	6	5	
+3	7	4	
+
+Path length:         23
+Maximum heap size:   381
+Vertices searched:   624
+-----------------------------------------------------------
+3	5	6	
+1	4	8	
+7		2	
+
+Path length:         15
+Maximum heap size:   51
+Vertices searched:   78
+-----------------------------------------------------------
+4	8	3	
+	7	2	
+6	1	5	
+
+Path length:         21
+Maximum heap size:   331
+Vertices searched:   579
+-----------------------------------------------------------
+8	5	2	
+7	6	1	
+4		3	
+
+Path length:         21
+Maximum heap size:   347
+Vertices searched:   592
+-----------------------------------------------------------
+	6	2	
+8	5	4	
+7	1	3	
+
+Path length:         26
+Maximum heap size:   2200
+Vertices searched:   4122
+-----------------------------------------------------------
+6	7	3	
+4	2		
+5	1	8	
+
+Path length:         23
+Maximum heap size:   671
+Vertices searched:   1237
+-----------------------------------------------------------
+6		7	
+3	8	4	
+2	5	1	
+
+Path length:         27
+Maximum heap size:   654
+Vertices searched:   1122
+-----------------------------------------------------------
+4	2		
+3	7	8	
+1	6	5	
+
+Path length:         24
+Maximum heap size:   1107
+Vertices searched:   2021
+-----------------------------------------------------------
+7	3	4	
+	1	5	
+8	6	2	
+
+Path length:         19
+Maximum heap size:   98
+Vertices searched:   157
+-----------------------------------------------------------
+3	5	2	
+7		8	
+1	4	6	
+
+Path length:         18
+Maximum heap size:   128
+Vertices searched:   190
+-----------------------------------------------------------
+4	5	3	
+	6	1	
+2	7	8	
+
+Path length:         23
+Maximum heap size:   881
+Vertices searched:   1472
+-----------------------------------------------------------
+7	1		
+4	8	2	
+3	5	6	
+
+Path length:         24
+Maximum heap size:   1020
+Vertices searched:   1806
+-----------------------------------------------------------
+8		5	
+6	3	4	
+7	2	1	
+
+Path length:         27
+Maximum heap size:   2333
+Vertices searched:   4460
+-----------------------------------------------------------
+5	7	6	
+2		8	
+4	3	1	
+
+Path length:         22
+Maximum heap size:   398
+Vertices searched:   703
+-----------------------------------------------------------
+1		8	
+4	7	3	
+5	2	6	
+
+Path length:         23
+Maximum heap size:   836
+Vertices searched:   1394
+-----------------------------------------------------------
+1	5	8	
+7	2		
+6	3	4	
+
+Path length:         21
+Maximum heap size:   241
+Vertices searched:   387
+-----------------------------------------------------------
+2	4	1	
+6	7		
+5	3	8	
+
+Path length:         23
+Maximum heap size:   591
+Vertices searched:   1027
+-----------------------------------------------------------
+3	4		
+6	8	1	
+7	5	2	
+
+Path length:         24
+Maximum heap size:   501
+Vertices searched:   856
+-----------------------------------------------------------
+2	1	7	
+3	5	6	
+8	4		
+
+Path length:         24
+Maximum heap size:   672
+Vertices searched:   1164
+-----------------------------------------------------------
+2	8	7	
+5	3		
+6	1	4	
+
+Path length:         23
+Maximum heap size:   204
+Vertices searched:   327
+-----------------------------------------------------------
+7	1	5	
+8	4	3	
+2		6	
+
+Path length:         21
+Maximum heap size:   254
+Vertices searched:   422
+-----------------------------------------------------------
+	5	2	
+1	8	4	
+6	7	3	
+
+Path length:         18
+Maximum heap size:   110
+Vertices searched:   165
+-----------------------------------------------------------
+8	3	2	
+6	7	1	
+4	5		
+
+Path length:         24
+Maximum heap size:   931
+Vertices searched:   1648
+-----------------------------------------------------------
+2		7	
+4	6	5	
+3	1	8	
+
+Path length:         23
+Maximum heap size:   430
+Vertices searched:   700

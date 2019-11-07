@@ -1,0 +1,29 @@
+int a[MAX];
+deque<int> q;
+ 
+int main()
+{
+    int n, k, tmp;
+    while(scanf("%d%d", &n, &k) != EOF){
+        q.clear();
+        for(int i = 0; i < n; i++) scanf("%d", &a[i]);
+        for(int i = 0; i < n; i++){  //维护一个单调递增队列，求最小
+            while(!q.empty() && a[q.back()] >= a[i]) q.pop_back();  
+            q.push_back(i);
+            while(!q.empty() && i - q.front() + 1 > k) q.pop_front();
+            if(i+1==k) printf("%d", a[q.front()]);
+            else if(i+1 > k) printf(" %d", a[q.front()]);
+        }
+        printf("\n");
+ 
+        q.clear();
+        for(int i = 0; i < n; i++){  //维护一个单调递减队列，求最大
+            while(!q.empty() && a[q.back()] <= a[i]) q.pop_back();
+            q.push_back(i);
+            while(i - q.front() + 1 > k) q.pop_front();
+            if(i+1==k) printf("%d", a[q.front()]);
+            else if(i+1 > k) printf(" %d", a[q.front()]);
+        }
+        printf("\n");
+    }
+}

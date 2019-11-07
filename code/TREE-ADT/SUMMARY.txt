@@ -1,0 +1,4 @@
+A tree is a very important data structure. --- hierarchical structure
+It has the ability to classify data and separate it reducing the overhead of search. 
+
+tail recursion
