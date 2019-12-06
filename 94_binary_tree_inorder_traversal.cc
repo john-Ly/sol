@@ -239,7 +239,6 @@ vector<T> PreorderMorris(BinaryNode<T> *root) {
     return res;
 }
 
-
 template <class T>
 void Postorder(BinaryNode<T> *root) {
 	if(root == nullptr) return;
@@ -253,7 +252,7 @@ template <class T>
 void PostorderNonRecursive(BinaryNode<T> *root) {
 	if(root == nullptr) return;
     stack<BinaryNode<T>*> st;
-    vector<T> res;
+    list<T> res;
     st.push(root);
     // 前序 顺序是 根-左-右; 后续: 根-右-左 ==> 左-右-根(头插法 保证逆序)
     while (!st.empty()) {
@@ -391,6 +390,7 @@ void zigzagLevelOrder(BinaryNode<T> *root, vector<vector<T>>& res) {
 	}
 }
 
+// 等于的情况 不插入
 template <class T>
 BinaryNode<T>* Insert(BinaryNode<T> *root, char data) {
 	if(root == nullptr) {
@@ -406,6 +406,7 @@ BinaryNode<T>* Insert(BinaryNode<T> *root, char data) {
 // https://www.cnblogs.com/grandyang/p/4298435.html
 // BST  左<根<右
 // 但是有的题目 会要求 左<=根<右
+// @TODO 这种做法需要一个更大的类型进行比较(比如int -> long)
 template <class T, class T2 = int>
 bool isValidBST(BinaryNode<T> *root, T2 min, T2 max) {
     if(!root) return true;
@@ -416,6 +417,7 @@ bool isValidBST(BinaryNode<T> *root, T2 min, T2 max) {
 // * &  传入指针的指针 (实际)
 // 如果只是指针可能会造成拷贝
 // 实际中序遍历
+// @TODO 理解不了递归
 template <class T>
 bool isValidBST(BinaryNode<T> *root, BinaryNode<T>*& pre) {
     if(!root) return true;
@@ -427,6 +429,26 @@ bool isValidBST(BinaryNode<T> *root, BinaryNode<T>*& pre) {
     }
     pre = root;
 	return isValidBST(root->right, pre);
+}
+
+
+// 如果递归不太理解还是 不要勉强
+bool isValidBST(TreeNode* root) {
+    stack<TreeNode*> st;
+    auto cur = root;
+    auto preValue = numeric_limits<long>::min();
+    while( cur || !st.empty() ) {
+        while(cur) {
+            st.push(cur);
+            cur = cur->left;
+        }
+
+        cur = st.top(); st.pop();
+        if(cur->val <= preValue) return false;
+        preValue = cur->val;
+        cur = cur->right;
+    }
+    return true;
 }
 
 template <class T>

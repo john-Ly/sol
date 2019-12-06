@@ -40,5 +40,6 @@ private:
 
     // 保证O(1)
     // hash存储 key --> iterator 的映射(不会因为链表元素的位置变化而失效)
-    unordered_map<int, list<pair<int, int>>::iterator> m;
+    unordered_map<int, decltype(l.begin())> m;
+    // unordered_map<int, list<pair<int, int>>::iterator> m;
 };
