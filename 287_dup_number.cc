@@ -3,10 +3,10 @@
 #include <algorithm>
 using namespace std;
 
-// nums不能修改 O(n lgn) + space O(1)
+// n+1 个数,  每个数范围 [1, n]
+// 要求: nums不能修改 O(n lgn)  upper_bound O(n^2) + space O(1)
 
-// https://leetcode.com/problems/find-the-duplicate-number/solution/
-// 本质是类用二分搜索
+// https://leetcode.com/problems/find-the-duplicate-number/solution
 int findDuplicate1(vector<int>& nums) {
     sort(nums.begin(), nums.end());
 

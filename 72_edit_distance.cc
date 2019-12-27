@@ -74,8 +74,6 @@ int match(string s1, string s2, int i, int j, vector<vector<int>>& v) {
     int& ret = v[i][j];
     if (s1.size() == i) {
         return ret = s2.size() - j; // 左闭右开的优势
-        // 二分查找有几种写法？它们的区别是什么？ - Jason Li的回答 - 知乎
-        // https://www.zhihu.com/question/36132386/answer/530313852
     }
     if (s2.size() == j) {
         return ret = s1.size() - i;

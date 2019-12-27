@@ -6,7 +6,7 @@ using namespace std;
 // 2. http://www.cnblogs.com/grandyang/p/4125510.html
 
 
-// 针对每一对 进行比较 
+// 针对每一对 进行比较
 bool isPalindrome(int x) {
     if (x < 0 || (x % 10 == 0 && x != 0)) return false;
     int div = 1;

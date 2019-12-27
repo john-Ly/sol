@@ -175,6 +175,7 @@ int maxSubSum4(const vector<int> & a, int& start, int& end) {
  *    maxAt(i) = max(0, maxAt(i-1)) + A[i]
  *               filter the negative sum
  */
+// @TODO 如果全是负数 找出最大的值
 int fastestMaxSum( const vector<int> & a ) {
     int maxSum = MIN, thisSum = 0;
 

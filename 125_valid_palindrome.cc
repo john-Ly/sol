@@ -5,7 +5,7 @@ using namespace std;
 
 /*  回文字符串的判断 BinaryPredicate(可以自定义比较)
  hash 表不能用于判断 因为hash bucket里面的内容可能不同
- 
+
 #include <algorithm>
 bool is_palindrome(const std::string& s) { return std::equal(s.begin(), s.begin() + s.size()/2, s.rbegin()); }
 
@@ -15,9 +15,9 @@ int main() {
 }
 */
 
-// 0-9: [48, 57]    '0' 和 'P'之间相差32所以 会造成错误
-// A-Z: [65, 90]
-// a-z: i97, 122]
+// 0-9: [48, 57]   0x30    '0' 和 'P'之间相差32所以 会造成错误
+// A-Z: [65, 90]   0x41
+// a-z: [97, 122]  0x61
 bool equal(const char a, const char b) {
     if( a==b || a-b == 32 || b-a == 32)
         return true;
@@ -35,6 +35,7 @@ bool isPalindrome(string s) {
         // 2. 再判断右边(1条件成立)
         else if (!isalnum(s[right])) {--right;}
         // 3. 判断是否相等 (0-9 与大写字母 P-Y 不会干扰)
+        // 有点绕
         else if ((s[left] + 32 - 'a') %32 != (s[right] + 32 - 'a') % 32) {
        // else if (!equal(s[left], s[right])) {
             // cout << "edn" << endl;
