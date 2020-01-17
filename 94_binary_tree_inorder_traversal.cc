@@ -431,7 +431,6 @@ bool isValidBST(BinaryNode<T> *root, BinaryNode<T>*& pre) {
 	return isValidBST(root->right, pre);
 }
 
-
 // 如果递归不太理解还是 不要勉强
 bool isValidBST(TreeNode* root) {
     stack<TreeNode*> st;
@@ -506,7 +505,6 @@ template <class T>
 bool isBalanced(BinaryNode<T> *root) {
     return HeightofTree_DFS(root) != -1;
 }
-
 
 // 层次遍历的层数即是maxDepth
 template <class T>

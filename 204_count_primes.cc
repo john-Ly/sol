@@ -101,10 +101,58 @@ int gcd_simple(int p, int q) {
 }
 
 // 利用模运算更高效的算法
+// 假设 lhs > rhs
 int gcd(int p, int q) {
+    // 0 不能为分母
 	if(q == 0) return p;
 	return gcd(q, p%q);
 }
+
+// @ret 最大公约数, x;y为一组解 {ax + by = gcd(a, b)}
+// https://ksmeow.moe/euclid/#toc-6
+int exgcd(int a, int b, int &x, int &y) {
+    if(b == 0) {
+        x = 1;   // 设置b=0时的特殊解
+        y = 0;
+        return a;
+    }
+
+    int ans = exgcd(b, a % b, x, y);
+    int t = x; // 将x2, y2换算成x1, y1
+    x = y;
+    y = t - a / b * y;
+    return ans;
+}
+
+// https://www.wikiwand.com/zh/%E6%89%A9%E5%B1%95%E6%AC%A7%E5%87%A0%E9%87%8C%E5%BE%97%E7%AE%97%E6%B3%95#/%E5%AE%9E%E7%8E%B0
+// 扩展欧几里得实现
+
+// def ext_euclid(a, b):
+//     old_s,s=1,0
+//     old_t,t=0,1
+//     old_r,r=a,b
+//     if b == 0:
+//         return 1, 0, a
+//     else:
+//         while(r!=0):
+//             q=old_r//r
+//             old_r,r=r,old_r-q*r
+//             old_s,s=s,old_s-q*s
+//             old_t,t=t,old_t-q*t
+//     return old_s, old_t, old_r
+
+
+
+// https://www.cnblogs.com/SeanOcean/p/11251324.html
+// 同余   a = xm+r  b = ym+r
+// a%m = b%m (两者余数相等)    a-b = (x-y)m 当然能够整除m
+
+// http://blog.miskcoo.com/2014/09/chinese-remainder-theorem#i-4
+// 中国剩余定理(多个同余的线性方程)
+
+// 伪随机数生成器
+// https://www.windism.cn/3635386729.html#%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0
+// 蓄水池 采样 随机数
 
 // 最小公倍数
 // 分解质因数法:
