@@ -146,6 +146,50 @@ void InorderNonRecursive(BinaryNode<T> *root) {
     }
 }
 
+namespace sol_283 {
+// https://www.cnblogs.com/grandyang/p/5306162.html
+// bst+给定节点 输出中序遍历的下一个节点(没有返回 nullptr)
+// 次优化
+template <class T>
+BinaryNode<T>* InorderSuccessor(BinaryNode<T> *root,
+                                BinaryNode<T> *p) {
+    bool b = false;
+    stack<BinaryNode<T>*> st;
+    auto cur = root;
+    while (cur || !st.empty()) {
+        while(cur) {
+            st.push(cur);
+            cur = cur->left;
+        }
+
+        cur = st.top(); st.pop();
+        if (b) return cur;
+        if (cur == p) b = true;
+        cur = cur->right;
+    }
+    return nullptr;
+}
+
+// upper_bound
+template <class T>
+BinaryNode<T>* InorderSuccessor2(BinaryNode<T> *root,
+                                 BinaryNode<T> *p) {
+    BinaryNode<T>* res = nullptr;
+    while (root) {
+        if (root->data > p->data) {
+            res = root;
+            root = root->left;
+        } else {
+            // < 说明在右子树
+            // = 说明还不是想要的树
+            root = root->right;
+        }
+    }
+    return res;
+}
+
+}
+
 /*
  1. 若节点还有左子树, 先把左子树访问完(符合中序遍历的顺序)
  2. 没有左子树, 访问最左节点, 并尝试访问右子树
@@ -571,9 +615,9 @@ T kthSmallest(BinaryNode<T> *root, int k) {
     // @fixme: should return invalid number, e.g. T==int, Return numeric_limits<long>::min()
     if(!root) return {};
     int cnt = count(root->left);
-	if(k <= cnt)
+	if(k <= cnt) // 左子树
 		return kthSmallest(root->left, k);
-	else if(k > cnt+1)
+	else if(k > cnt+1) // 右子树
 		return kthSmallest(root->right, k-cnt-1);
 	else
         return root->data;

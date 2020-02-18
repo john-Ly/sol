@@ -4,6 +4,9 @@
 #include <unordered_map>
 using namespace std;
 
+
+// https://songlee24.github.io/2015/05/10/design-LRU-Cache/
+
 // https://leetcode.com/problems/lru-cache/discuss/45976/C++11-code-74ms-Hash-table-+-List/225468
 // 应该是LRU <-- MRU  (作为基础软件 更应该注意性能 其他高效的实现方法 注意下)
 //

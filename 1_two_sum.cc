@@ -3,12 +3,10 @@
 #include <unordered_map>
 using namespace std;
 
+// https://www.cnblogs.com/grandyang/p/4130379.html
 
-// @TODO 1. unordered_map的使用
-// 2.
-vector<int> twoSum(vector<int> &numbers, int target)
-{
-    //Key is the number and value is its index in the vector.
+vector<int> twoSum(vector<int> &numbers, int target) {
+    // Key is the number and value is its index in the vector.
 	unordered_map<int, int> hash;
 	vector<int> result;
 	for (int i = 0; i < numbers.size(); i++) {

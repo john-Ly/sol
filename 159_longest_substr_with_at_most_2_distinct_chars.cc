@@ -6,10 +6,12 @@
 using namespace std;
 
 // 至多两个不同的字符 --> 至多k个不同的字符
+// topic: 滑动窗口
+// 优先第二种方法
+
 // https://www.cnblogs.com/grandyang/p/5185561.html
 // https://www.cnblogs.com/grandyang/p/5351347.html
 // https://leetcode.com/problems/minimum-window-substring/discuss/26808/Here-is-a-10-line-template-that-can-solve-most-'substring'-problems
-// 滑动窗口问题实际是有固定的模板的 @NOTE
 
 namespace so1 {
 int lengthOfLongestSubstringTwoDistinct(string s) {
@@ -33,6 +35,7 @@ int lengthOfLongestSubstringTwoDistinct(string s) {
 }
 
 // unorderd_map可以用来统计字符出现的个数 或者 下标
+// 滑动窗口问题不需要字符已经出现的次数
 namespace so2 {
 int lengthOfLongestSubstringTwoDistinct(string s) {
     int res = 0, left = 0;

@@ -3,7 +3,7 @@
 #include <algorithm>
 using namespace std;
 
-// 
+//
 
 template<class T>
 void printVector(vector<vector<T>> const &mat) {

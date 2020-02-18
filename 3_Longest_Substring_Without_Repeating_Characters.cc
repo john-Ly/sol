@@ -2,8 +2,6 @@
 
 // @NOTE 有时空复杂度的分析
 // https://leetcode.com/problems/longest-substring-without-repeating-characters/solution/
-// The previous implements all have no assumption on the charset of the string s.
-// If the charset is rather small, replace the Map with an integer array as direct access table.
 
 // Commonly used tables are:
 // int[26] for Letters 'a' - 'z' or 'A' - 'Z'
@@ -16,16 +14,31 @@
 #include <unordered_set>
 using namespace std;
 
+// 最长子串: 无重复
+// topic: 滑动窗口 + hash 字符串特化
+// 重点看so1 + so4
+
+
 // Brute Force
 // time O(n^3) = n^2 * n
 // space O(min(n, m))  unordered_set需要的空间大小
 namespace so1 {
     // 左闭右开 time: O(n)
-    bool allUnique(string s, int start, int end) {
+    bool allUnique2(string s, int start, int end) {
         unordered_set<char> hash;
         for (int i = start; i < end; i++) {
             if (hash.count(s[i])) return false;
             hash.insert(s[i]);
+        }
+        return true;
+    }
+
+    // leetcode 超时
+    bool allUnique(string s, int start, int end) {
+        int m[128] = {0}, mask = 0;
+        for (int i = start; i < end; i++) {
+            if (m[s[i]] == 1) return false;
+            ++m[s[i]];
         }
         return true;
     }
@@ -35,7 +48,8 @@ namespace so1 {
         int ans = 0;
         for (int i = 0; i < n; i++)
             for (int j = i + 1; j <= n; j++)
-                // 左闭右开 计算长度 j-i即可; 左闭右闭 计算长度 j-i+1
+                // 左闭右开 计算长度 j-i即可;
+                // 左闭右闭 计算长度 j-i+1
                 if (allUnique(s, i, j)) ans = max(ans, j - i);
         return ans;
     }
@@ -122,10 +136,11 @@ namespace so4 {
 
 int lengthOfLongestSubstring(string s) {
     // for ASCII char sequence, use this as a hashmap
-    vector<int> charIndex(256, -1);
+    vector<int> charIndex(256, -1);         // 1. 遍历string, 所以相同的字符的下标是递增的
     int longest = 0, m = 0;
 
     for (int i = 0; i < s.length(); i++) {
+        // m: 左边界(如果不存在 m 不变; 如果存在重复 更新idx+1， 左边界必须要从新的开始)
         m = max(charIndex[s[i]] + 1, m);    // automatically takes care of -1 case
         charIndex[s[i]] = i;
         longest = max(longest, i - m + 1);

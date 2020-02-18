@@ -4,6 +4,8 @@ using namespace std;
 
 // https://www.cnblogs.com/grandyang/p/6854825.html
 //
+// https://izualzhy.cn/binary-search-analysis 如何写出正确的二分法以及分析
+//
 // find 应该对应 左闭右开的区间
 // lower_bound/ upper bound如果传入的区间范围 都是闭合的也无所谓 因为(循环体中存在相等的情况)
 

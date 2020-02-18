@@ -7,13 +7,9 @@ struct BinaryNode {
     BinaryNode *left;
     BinaryNode *right;
 
-    BinaryNode( const int& _data, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr )
-        : data{ _data }, left{ lt }, right{ rt } { }
-
-    BinaryNode( int && _data, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr )
+    BinaryNode( int _data, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr )
         : data{ std::move( _data ) }, left{ lt }, right{ rt } { }
 };
-
 
 // @卡特兰数
 // https://www.cnblogs.com/grandyang/p/4299608.html
