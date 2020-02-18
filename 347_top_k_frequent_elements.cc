@@ -173,23 +173,6 @@ int thirdMax(vector<int>& nums) {
     // (如果只有一个数, third==second; 但是第一个判断条件足够)
 }
 
-int thirdMax(vector<int>& nums) {
-    long first = LONG_MIN, second = LONG_MIN, third = LONG_MIN;
-    for (int num : nums) {
-        if (num > first) {
-            third = second;
-            second = first;
-            first = num;
-        } else if (num > second && num < first) {
-            third = second;
-            second = num;
-        } else if (num > third && num < second) {
-            third = num;
-        }
-    }
-    return (third == LONG_MIN || third == second) ? first : third;
-}
-
 };
 
 // leetcode 703
@@ -236,6 +219,7 @@ int partition(vector<int>& nums, int left, int right) {
     return r;
 }
 
+// leetcode 215
 // https://www.cnblogs.com/grandyang/p/4539757.html
 int findKthLargest(vector<int>& nums, int k) {
     int left = 0, right = nums.size() - 1;

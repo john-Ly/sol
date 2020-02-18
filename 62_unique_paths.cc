@@ -11,7 +11,6 @@ using namespace std;
 // 实际是一个组合问题 A(m+n, m+n) @TODO
 // https://www.cnblogs.com/grandyang/p/4353555.html
 
-
 template<class T>
 void printVector(vector<vector<T>> const &mat) {
     cout << "{\n";
