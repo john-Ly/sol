@@ -3,6 +3,8 @@
 #include <unordered_map>
 #include <cstdlib>  // rand
 
+// topic: random 概率
+
 // @TODO 还有follow up
 // https://www.cnblogs.com/grandyang/p/5740864.html
 class RandomizedSet {

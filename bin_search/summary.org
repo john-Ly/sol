@@ -1,0 +1,35 @@
+* Intro
+ 1. [[https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/85173/Share-my-thoughts-and-Clean-Java-Code][二分搜索的场景]]   
+   The key point for any binary search is to figure out the "Search Space".
+   Index: the array is *sorted* in one direction
+   Range: the array is *unsorted* and we are going to find a specific number, we can use "range".  split the range  划分一半
+ 2. 常见考察点
+   + 边界条件: 死循环或者漏掉
+     #+begin_src c++
+     left = 0, rihgt = n
+     while (l < r) { ...  r = mid }
+     // 退出循环后 l == r
+
+     left = 0, rihgt = n-1
+     while (l <= r) { ... r = mid-1 }
+     // 退出循环后 l > r
+
+     #+end_src
+   + 数组是否出现重复
+   + *lower/upper bound*
+   + 返回等于x的个数
+   + 在有序循环数组 进行搜索  (rotate)
+   + mid
+   + 循环退出后 left/right指向哪里
+** 二分属于基本思路 不要纠结 一题多解(找出最快的解法)
+* 题型
+** 162 无序数组 局部极值
+   雨水 @TODO
+**  33 有序循环数组(rotated + 可能存在重复) 查找target值
+   // @TODO 十分迷惑
+   find 查找是否存在 使用l = 0, r = n-1
+                         while(l <= r) { mid == target, return mid ; ...}
+                         // 循环退出 非法 不存在
+                         
+** 有序无重数组 查找arr[i] == i 的最左边的下标, 都不满足返回-1
+** pow计算

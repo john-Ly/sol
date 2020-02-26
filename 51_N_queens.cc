@@ -126,7 +126,9 @@ void helper(int curRow, vector<int>& queenCol, vector<vector<string>>& res) {
 
 vector<vector<string>> solveNQueens(int n) {
     vector<vector<string>> res;
-    vector<int> queenCol(n, -1); // 第i个皇后坐标 (i, queenCol[i]) 直接存放列的index
+    // 第i个皇后坐标 (i, queenCol[i]) 直接存放列的index
+    // 一维数组 下标 可以加以利用
+    vector<int> queenCol(n, -1);
     helper(0, queenCol, res);
     return res;
 }

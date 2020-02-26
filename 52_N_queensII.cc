@@ -18,7 +18,8 @@ void printVector(vector<vector<T>> const &mat) {
     cout << "}\n";
 }
 
-// @TODO 和全排列的思想一致
+// @TODO 和全排列的思想一致(全排列有很多不符合的情况 枚举范围太大)
+// @NOTE chenshuo 网络课 给出了一个高效的bitmask方式 掩码
 // https://www.cnblogs.com/grandyang/p/4380706.html
 // 其实组成的n*n的n皇后矩阵可以看成一个数学坐标系，我们知道y=k*x+b表示的是一条直线，k为斜率，b为y轴上的高度，当k=0;b=0;的时候y=x为一条穿过坐标系原点并且与x轴成45度的直线。
 
@@ -35,7 +36,7 @@ void dfs(int i, vector<bool> &col, vector<bool>& main, vector<bool> &anti, int &
         count++; return;
     }
     for (int j = 0; j < col.size(); j++) {
-        // 副对角线: i+j = n-1(常数)
+        // 副对角线: i+j = n-1(常数)  每个点都满足
         // 主对角线: j-i+n = n(常数)
         if (col[j] && main[j-i+col.size()] && anti[i+j]) {
             col[j] = main[j-i+col.size()] = anti[i+j] = false;

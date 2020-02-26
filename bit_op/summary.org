@@ -1,0 +1,51 @@
+* Intro
+  @TODO 详细的整理 后续补充
+* 场景
+** singleNumber 
+   136/137/260
+   一个数组 一个数出现一次/其余两次
+** 明文加密
+   text , pass
+   mi = text ^ pass
+   ====
+   发送给用户 用户使用密码
+   mi ^ pass => text 恢复出明文
+** bloom filter
+  + 场景
+   网页黑名单 + 邮件过滤 + 爬虫网址判重
+   容忍一定失误率
+   空间要求
+  + @pic 公式
+   input: 样本的个数n + 允许的失误率p
+   output: hash的个数(独立均匀) [0,m-1]  + bit_map大小m个位置  调整后的失误率
+** utf-8 实现
+   @see utf8.cc
+   取出那几位, 那几位就要全1
+   (& 0x0F) 取出低4位 ==> 判断
+   | 将不同的位组合在一起
+** malloc 返回对齐值
+   @see malloc_alignment.cc  预先分配aligment字节 + 使用有符号整数
+** mask 掩码 zsim_cache_array
+   cache 组相连 (16路组相连, 一个set里面有16个cache_line)
+   也类似页表的情况(多级页表 实际上就是位运算)
+
+   uint32_t setMask = numSets-1 ;
+   1. 取模运算 (& mask)
+     uint32_t  set = lineAddr & setMask 
+   2. 位操作
+     |= (1ul << p) 打开第p位
+     &= (~(1ul << p)) 关闭第p位
+     & (1<<p) 确认是否包含p位 返回0或者1<<p
+     ^= (1ul << p) 切换
+   3. 异或运算 ^
+     *n^0 = n     n^n = 0*
+     交换律 和 结合律
+     + 给定整数a 和b 交换
+       a = a0, b =  b0;
+       a = a^b;   // a = a0^b0  b=b0
+       b = a^b;   // a = a0^b0  b=a0^b0^b0=a0
+       a = a^b;   // a = a0
+   4. 循环右移 补符号位或者0
+** ramulator 里面判断奇偶数
+   a & (a-1) == 0 说明是2的幂次(限定正整数)
+** memmove/memcpy 实现

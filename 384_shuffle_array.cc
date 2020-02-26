@@ -83,3 +83,18 @@ vector<int> shuffle(const vector<int>& origin) {
 }
 
 }
+
+namespace randomPrint {
+// 无重数组等概率 打印M个数
+void PrintMRandom (const vector<int>& v, int m) {
+    int n = v.size();
+    for (int i=0; i<m; ++i) {
+        int random = rand()%(n-i);
+        cout << v[random] << '-';
+        swap(v[random], v[n-i-1]);
+    }
+}
+
+    // @TODO 不太理解 等概率输出M个数M
+
+}
