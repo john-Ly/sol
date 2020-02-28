@@ -27,8 +27,7 @@ int kthSmallest(vector<vector<int>>& matrix, int k) {
 }
 
 // 也可以使用二分法 但是有点复杂
-
-
+// https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/discuss/85173/Share-my-thoughts-and-Clean-Java-Code
 
 
 

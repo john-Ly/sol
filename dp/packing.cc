@@ -4,6 +4,9 @@
 #include <string> // memset()
 using namespace std;
 
+// http://imwyy.xyz/2018/01/24/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92%E4%B9%8B%E8%83%8C%E5%8C%85%E9%97%AE%E9%A2%98%E5%8F%8Aleetcode%E5%AE%9E%E4%BE%8B/
+// https://www.liwei.party/2018/09/21/leetcode-solution/dynamic-programming-7/#toc-heading-2
+// https://zhuanlan.zhihu.com/p/93857890
 // 背包问题 最优的定义 : 1. 只要收益最大  2. 背包完全装满
 
 // @TODO
