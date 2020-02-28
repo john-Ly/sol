@@ -27,8 +27,6 @@ string addBinary(const string& a, const string& b) {
     return carry == 1 ? "1" + res : res;
 }
 
-
-
 // https://www.cnblogs.com/grandyang/p/5944311.html
 // leetcode-415
 string addStrings(string num1, string num2) {
@@ -80,7 +78,6 @@ string addBinary2(string a, string b) {
 
     return carry ? "1" + res : res;
 }
-
 
 int main() {
     string a = "1010", b = "1011";

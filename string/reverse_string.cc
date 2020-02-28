@@ -4,7 +4,7 @@
 using namespace std;
 // 原地翻转字符串
 // https://www.techiedelight.com/reverse-string-in-place-cpp/
-// https://www.techiedelight.com/reverse-string-cpp/ 
+// https://www.techiedelight.com/reverse-string-cpp/
 // 里面有提到 利用rbegin() 和 rend() 来进行翻转
 // for_each函数 + string 的构造函数
 //

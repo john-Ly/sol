@@ -48,6 +48,7 @@ public:
 };
 
 namespace so2 {
+// 132 leetcode
 // 当s可以分为多个子回文字符串 求最小的切割数
 // "aab"
 // "a" + "a" + "b"
@@ -75,8 +76,6 @@ int partition(string s) {
     return cut[n-1];
 }
 }
-
-
 
 int main() {
     string s = "abcd";
