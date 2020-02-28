@@ -120,7 +120,6 @@ int majorityElement3(vector<int>& nums) {
     return majority;
 }
 
-
 // @TODO bit位操作的总结
 // 191_number_of_bits
 int hammingWeight(uint32_t n) {
@@ -141,7 +140,6 @@ bool isPowerOfTwo(int n) {
     // 这种方法很巧妙 n-1  造成高位为0 低位为1   与原来的值相与得到结果
     return (n > 0) && (!(n & (n - 1)));
 }
-
 
 // 326_power_of_three
 namespace p_3 {

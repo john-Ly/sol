@@ -9,6 +9,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+// 判断两个链表的交点(无环链表)
 ListNode *getIntersectionNode(ListNode *headA, ListNode *headB) {
     if (!headA || !headB) return NULL;
     int lenA = getLength(headA), lenB = getLength(headB);

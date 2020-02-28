@@ -22,7 +22,7 @@ ListNode* deleteDuplicates(ListNode* head) {
     }
     return head;
 }
-    
+
 int main() {
 
     return 0;

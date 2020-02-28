@@ -7,6 +7,7 @@ using namespace std;
 
 // https://leetcode.com/problems/single-number-iii/discuss/68921/C%2B%2B-solution-O(n)-time-and-O(1)-space-easy-understaning-with-simple-explanation
 
+// 两个数只出现一次, 求出这两个数
 vector<int> singleNumber(vector<int>& nums) {
     int diff = 0;
     for (auto item : nums) diff ^= item;

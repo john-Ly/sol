@@ -40,8 +40,34 @@ void moveZeroes(vector<int>& nums) {
     }
 }
 
+// 奇数排在前面 偶数排在后面 但是顺序变换了
+void moveEvens(vector<int>& nums) {
+    for (int i = 0, j = 0; i < nums.size(); ++i) {
+        // cout << i << '-' << j << ": ";
+        if (nums[i]%2 != 0) {
+            swap(nums[i], nums[j++]);
+        }
+        // pv(nums);
+    }
+}
+
+void reOrderArray(vector<int> &array) {
+    deque<int> result;
+    int num = array.size();
+    for(int i = 0; i < num; i++){
+        if(array[num - i - 1] % 2 == 1){
+            result.push_front(array[num - i - 1]);
+        }
+        if(array[i] % 2 == 0){
+            result.push_back(array[i]);
+        }
+    }
+    array.assign(result.begin(),result.end());
+}
+
 int main() {
     vector<int> v = {0,1,0,3,12};
     moveZeroes(v);
+    moveEvens(v);
     return 0;
 }

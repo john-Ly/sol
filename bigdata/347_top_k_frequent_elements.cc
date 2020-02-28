@@ -9,6 +9,7 @@ using namespace std;
 
 // leetcode 387
 // 返回字符串只出现一次的字符(建立hash表)
+// string += ch
 int firstUniqChar(string s) {
     // unordered_map<char, int> m;
     int m[128] = {0};

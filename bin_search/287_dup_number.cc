@@ -23,7 +23,6 @@ int findDuplicate1(vector<int>& nums) {
 // 可以使用hash_set 但是空间复杂度超过 O(1)要求
 
 // 在1-n的范围里面进行二分搜索
-// @TODO 暂时不理解
 // https://leetcode.com/problems/find-the-duplicate-number/discuss/72844/Two-Solutions-(with-explanation)%3A-O(nlog(n))-and-O(n)-time-O(1)-space-without-changing-the-input-array
 int findDuplicate(vector<int>& nums) {
     int left = 0, right = nums.size(); // [0, n] 表示n+1个数字

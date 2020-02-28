@@ -7,13 +7,28 @@ using namespace std;
 // https://www.cnblogs.com/grandyang/p/4743837.html
 // 找到丑数序列的 第几个( @TODO)
 
-
 bool isUgly(int num) {
     if (num <= 0) return false;
     while (num % 2 == 0) num /= 2;
     while (num % 3 == 0) num /= 3;
     while (num % 5 == 0) num /= 5;
     return num == 1;
+}
+
+// https://www.cnblogs.com/grandyang/p/4743837.html
+int nthUglyNumber(int n) {
+    priority_queue<long, vector<long>, greater<long>> pq;
+    pq.push(1);
+    for (long i = 1; i < n; ++i) {
+        long t = pq.top(); pq.pop();
+        while (!pq.empty() && pq.top() == t) {
+            t = pq.top(); pq.pop();
+        }
+        pq.push(t * 2);
+        pq.push(t * 3);
+        pq.push(t * 5);
+    }
+    return pq.top();
 }
 
 // https://www.cnblogs.com/grandyang/p/4800552.html

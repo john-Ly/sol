@@ -30,7 +30,7 @@ int fib_recursion(int n) {
 // Extra Space: O(n)
 
 // 递归+记忆数组
-// 给出长方形大小 计算铺设方法的种类 + 
+// 给出长方形大小 计算铺设方法的种类
 // https://leetcode.com/problems/climbing-stairs/solution/  详细解释
 vector<int> cache(101, -1);
 int tiling(int width) {
@@ -103,6 +103,13 @@ int climbingStairs( int n ) {
 	return total;
 }
 ////////////////////////////////////////////////////////////////////
+
+// 递归实现 累加和
+int sum(int n) {
+    if (n < 0) return -1;
+    if (n<=1) return n;
+    return n + sum(n-1);
+}
 
 int main() {
 	memset(cache, -1, sizeof(cache));

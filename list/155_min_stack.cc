@@ -73,6 +73,51 @@ private:
 // 题1. 利用两个栈结构实现队列
 // stack_enqueue + stack_dequeue
 // 每次要pop的时候 先把push栈全部装入pop栈(1.要全部装入 2.pop栈必须为空)
+class stack_queu {
+public:
+    void push(int node) {
+        stack1.push(node);
+    }
+
+    int pop() {
+        if(stack2.empty()){
+            while(stack1.size() > 0){
+                int data = stack1.top();
+                stack1.pop();
+                stack2.push(data);
+            }
+        }
+        int pop_element = stack2.top();
+        stack2.pop();
+        return pop_element;
+    }
+
+private:
+    stack<int> stack1;
+    stack<int> stack2;
+};
 
 // 题2. 一个栈 排序(使用一个辅助栈)
 // 辅助栈先尽量保持排序 再申请一个变量暂存 类似汉诺塔
+
+// 题3: 给顶一个入栈顺序, 判断一个出栈顺序是否可能发生
+class sol3 {
+public:
+    bool IsPopOrder(vector<int> pushV,vector<int> popV) {
+        if(pushV.size() == 0) { return false; }
+
+        // pushV: 1 2 3 4 5
+        //  popV: 4 5 3 2 1  可能 按顺序压入1 2 3 4 -> 出栈4 -> 压入5 -> 顺序出栈
+        for(int i = 0, j = 0; i < pushV.size();i++){
+            stackData.push(pushV[i]);
+            while(j < popV.size() && stackData.top() == popV[j]){
+                stackData.pop();
+                j++;
+            }
+        }
+        return stackData.empty();
+    }
+
+private:
+    stack<int> stackData;
+};

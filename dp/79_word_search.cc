@@ -81,3 +81,47 @@ bool exist(vector<vector<char>>& board, string word) {
     return false;
 }
 }
+
+// 剑指 66
+// @NOTE 为什么有些bfs_回溯 需要反转   S[i][j] = "#"  s[i][j] = "c"
+
+// 查找字符串 两种搜索路径可能会有重合 所以要恢复原状
+// 探索机器人的路径 根本不需要 因为dfs在一个联通分量内可以找出所有符合要求的点
+class Solution {
+public:
+    int movingCount(vector<vector<T>> const &board, int threshold) {
+        int m = board.size(), n = board[0].size(); // 改成# 统一了两种判断情况
+        int count = 0;
+        if(threshold < 1 || m < 1 || n < 1){ return count; }
+
+        vector<vector<bool>> visited(m, vector<bool>(n, false));
+        count = movingCountCore(threshold, rows, cols, 0, 0, visited);
+        return count;
+    }
+
+private:
+    int movingCountCore(int threshold, int rows, int cols, int row, int col,
+                        vector<vector<bool>>& visited){
+        int count = 0;
+        if(row >= 0 && row < rows && col >= 0 && col < cols &&
+           getDigitSum(row)+getDigitSum(col) <= threshold &&
+           !visited[row*cols+col]) {
+            visited[row*cols+col] = true;
+            count = 1 + movingCountCore(threshold, rows, cols, row+1, col, visited)
+                + movingCountCore(threshold, rows, cols, row-1, col, visited)
+                + movingCountCore(threshold, rows, cols, row, col+1, visited)
+                + movingCountCore(threshold, rows, cols, row, col-1, visited);
+        }
+        return count;
+    }
+
+    int getDigitSum(int num){
+        int sum = 0;
+        while(num){
+            sum += num % 10;
+            num /= 10;
+        }
+        return sum;
+    }
+};
+
