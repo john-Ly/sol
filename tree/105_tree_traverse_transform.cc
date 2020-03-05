@@ -11,15 +11,11 @@ struct BinaryNode {
     BinaryNode *right;
 
     BinaryNode( const Comparable& _data, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr )
-        : data{ _data }, left{ lt }, right{ rt } { }
-
-    BinaryNode( Comparable && _data, BinaryNode *lt = nullptr, BinaryNode *rt = nullptr )
-        : data{ std::move( _data ) }, left{ lt }, right{ rt } { }
+        : data{std::move(_data) }, left{ lt }, right{ rt } { }
 };
 
-
 // @TODO
-// 遍历顺序构建树
+// 遍历顺序构建树 (中序和前序/后序  但是前序和后续不行)
 // 遍历顺序之间的转换
 
 // @SEE equal two containers  std::equal(...)

@@ -4,8 +4,19 @@
 #include <algorithm>
 using namespace std;
 
+// 原地反转 @SEE string/151
+// https://leetcode.com/problems/rotate-array/solution/
+// 解法3的思路非常直接
+//  Input: [1,2,3,4,5,6,7] and k = 3
+// Output: [5,6,7,1,2,3,4]
+void rotate3(vector<int>& nums, int k) {
+    const int n = nums.size(); k %= n;
+    std::reverse(nums.begin(), nums.end());
+    std::reverse(nums.begin(), nums.begin()+k);
+    std::reverse(nums.begin()+k, nums.end());
+}
+
 // https://www.cnblogs.com/grandyang/p/4298711.html
-//
 void rotate(vector<int>& nums, int k) {
     const int n = nums.size();
     vector<int> t = nums;
@@ -13,7 +24,6 @@ void rotate(vector<int>& nums, int k) {
         nums[(i + k) % n] = t[i];
     }
 }
-
 
 // 所有的位置都是正确的 只要记录k
 // 因为count记录了循环的次数 时间 O(n)
@@ -32,27 +42,6 @@ void rotate2(vector<int>& nums, int k) {
         } while (start != current);
     }
 }
-
-// https://leetcode.com/problems/rotate-array/solution/
-// 解法3的思路非常直接
-void rotate3(vector<int>& nums, int k) {
-    const int n = nums.size(); k %= n;
-    std::reverse(nums.begin(), nums.end());
-    std::reverse(nums.begin(), nums.begin()+k);
-    std::reverse(nums.begin()+k, nums.end());
-}
-
-/*
-void reverse(int[] nums, int start, int end) {
-    while (start < end) {
-        int temp = nums[start];
-        nums[start] = nums[end];
-        nums[end] = temp;
-        start++;
-        end--;
-    }
-}
-*/
 
 // https://blog.csdn.net/Hackbuteer1/article/details/6699837
 // http://blog.thpiano.com/?p=251

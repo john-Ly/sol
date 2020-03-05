@@ -4,8 +4,14 @@
 #include <vector>
 using namespace std;
 
-// @TODO 熟悉 std::reverse算法
-// 字符串初始化 和 string s = “”有什么区别
+namespace {
+// 原地翻转 @SEE 189
+void reverse_array(string &s) {
+	int n = s.length();
+	for (int i = 0; i < n/2; i++)
+		std::swap(s[i], s[n-i-1]);
+}
+}
 
 // https://www.cnblogs.com/grandyang/p/4606676.html
 // c的做法 没有尝试 @TODO 不过getline函数已经简化了很多
@@ -16,45 +22,36 @@ using namespace std;
 // https://www.cnblogs.com/grandyang/p/6703311.html
 // - 翻转字符串中的每个单词(可以考虑)
 
+namespace reverse_sentence {
 // 中间的空格简化成一个空格
 // 首尾空格省掉
 // 如果有多个空格字符连在一起，那么t会赋值为空字符串
-
-// "the sky is blue"
+// " the   sky is blue"
 // "blue is sky the"
-string reverseWords(string s) {
+
+// stringstream + getline 自动识别空格
+string reverseWords_ss(string s) {
     string res, tmp;
     stringstream ss(s);
-    while(getline(ss,tmp,' ')) {
-        cout << tmp << endl;
+    while( getline(ss, tmp, ' ') ) {
         if(tmp.empty()) continue;
-
-        // 有点像头插法
         res = ( res.empty() ? tmp : (tmp+" "+res) );
     }
-
     return res;
 }
 
+// 先整体反转 在针对每个单词进行反转
+// 假定所有的单词之间 只有一个空格; 首尾无空格(可以方便的剔除)
 string reverseWords2(string s) {
-    // istringstream可以使用>>操作符
-    istringstream is(s);
-    string tmp, res;
-    // 提取连在一起的非空格字符  (即words, 排除特殊字符)
-    is >> res;
-    cout << res << endl;
-    while(is >> tmp) res = tmp + " " + res;
-
-    // istringstream接收的是空字符串 因此会成
-    // @TODO 空串和之含有空格的字符串
-    // 字符串没有识别出来(仅含有空格的string)
-    // Checks if the string has no characters = ""
-    if(!res.empty() && res[0] == ' ') {
-        cout << res.size() << endl;
-        res = "";
+    reverse_array(s);
+    for (int i=0,j=0; i<s.size(); i=j+1) {
+        for(j=i; i<s.size(); ++j) {
+            if (s[j] == ' ') break;
+        }
+        std::reverse(s.begin()+i, s.begin()+j)
     }
+}
 
-    return res;
 }
 
 int main() {

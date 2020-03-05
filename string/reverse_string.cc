@@ -7,8 +7,6 @@ using namespace std;
 // https://www.techiedelight.com/reverse-string-cpp/
 // 里面有提到 利用rbegin() 和 rend() 来进行翻转
 // for_each函数 + string 的构造函数
-//
-//
 
 string reverse4(string const &s) {
     // string rev(s.rbegin(), s.rend());
@@ -20,14 +18,12 @@ string reverse4(string const &s) {
 	return rev;
 }
 
-
 // Function to reverse a string in-place in C++
 void reverse(string &s) {
 	int n = s.length();
 	for (int i = 0; i < n/2; i++)
 		std::swap(s[i], s[n-i-1]);
 }
-
 
 // Function to reverse a string in-place in C++
 void reverse2(string &s)

@@ -3,6 +3,8 @@
 #include <cstdio>
 #include <cassert>
 
+// http://www.cppblog.com/zenliang/articles/131782.html
+
 // memcpy函数，如果内存重叠则报错  --> src指向内容 不能修改
 void* memcpy(void* dst, const void* src, size_t count) {
     assert(dst!= nullptr && src != nullptr);  // non-ptr

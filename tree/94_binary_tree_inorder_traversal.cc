@@ -171,7 +171,7 @@ BinaryNode<T>* InorderSuccessor(BinaryNode<T> *root,
     return nullptr;
 }
 
-// upper_bound
+// upper_bound 二分逼近
 template <class T>
 BinaryNode<T>* InorderSuccessor2(BinaryNode<T> *root,
                                  BinaryNode<T> *p) {
@@ -448,53 +448,6 @@ BinaryNode<T>* Insert(BinaryNode<T> *root, char data) {
 	return root;
 }
 
-// https://www.cnblogs.com/grandyang/p/4298435.html
-// BST  左<根<右
-// 但是有的题目 会要求 左<=根<右
-// @TODO 这种做法需要一个更大的类型进行比较(比如int -> long)
-template <class T, class T2 = int>
-bool isValidBST(BinaryNode<T> *root, T2 min, T2 max) {
-    if(!root) return true;
-    if(root->data <= min || root->data >= max) return false;
-    return isValidBST(root->left, min, root->data) && isValidBST(root->right, root->data, max);
-}
-
-// * &  传入指针的指针 (实际)
-// 如果只是指针可能会造成拷贝
-// 实际中序遍历
-// @TODO 理解不了递归
-template <class T>
-bool isValidBST(BinaryNode<T> *root, BinaryNode<T>*& pre) {
-    if(!root) return true;
-
-	bool le = isValidBST(root->left, pre);
-    if(!le) return false;
-    if(pre) {
-        if(root->data <= pre->data) return false;
-    }
-    pre = root;
-	return isValidBST(root->right, pre);
-}
-
-// 如果递归不太理解还是 不要勉强
-bool isValidBST(TreeNode* root) {
-    stack<TreeNode*> st;
-    auto cur = root;
-    auto preValue = numeric_limits<long>::min();
-    while( cur || !st.empty() ) {
-        while(cur) {
-            st.push(cur);
-            cur = cur->left;
-        }
-
-        cur = st.top(); st.pop();
-        if(cur->val <= preValue) return false;
-        preValue = cur->val;
-        cur = cur->right;
-    }
-    return true;
-}
-
 template <class T>
 int count(BinaryNode<T>* node) {
     if (!node) return 0;
@@ -539,7 +492,19 @@ int HeightofTree(BinaryNode<T> *root) {
 	return max(HeightofTree(root->left), HeightofTree(root->right)) + 1;
 }
 
+// https://leetcode.com/problems/balanced-binary-tree/discuss/35691/The-bottom-up-O(N)-solution-would-be-better
+// 1.top down  重复遍历很多次
+template <class T>
+bool isBalanced(BinaryNode<T> *root) {
+    // height depth 的起始定义不同  depth会定义成0
+	if(!root) return true;
+    auto tmp = HeightofTree(root->left) - HeightofTree(root->right);
+    if(tmp > 1 || tmp < -1) return false;
+	return isBalanced(root->left) && isBalanced(root->right);
+}
+
 // 该函数应该不能用来计算树高度
+// 函数返回树的高度 但是-1表示 不平衡
 template <class T>
 int HeightofTree_DFS(BinaryNode<T> *root) {
 	if(!root) return 0;
@@ -551,18 +516,7 @@ int HeightofTree_DFS(BinaryNode<T> *root) {
 	return max(lHeight, rHeight) + 1;
 }
 
-// https://leetcode.com/problems/balanced-binary-tree/discuss/35691/The-bottom-up-O(N)-solution-would-be-better
-// 1.top down
-template <class T>
-bool isBalanced(BinaryNode<T> *root) {
-    // height depth 的起始定义不同  depth会定义成0
-	if(!root) return true;
-    auto tmp = HeightofTree(root->left) - HeightofTree(root->right);
-    if(tmp > 1 || tmp < -1) return false;
-	return isBalanced(root->left) && isBalanced(root->right);
-}
-
-// 2. bottom up
+// 2. bottom up (只遍历一次)
 template <class T>
 bool isBalanced(BinaryNode<T> *root) {
     return HeightofTree_DFS(root) != -1;
@@ -647,7 +601,6 @@ int minDepth2(BinaryNode<T> *root) {
 // @TODO
 // 如果BST增删十分频繁 求kth也频繁  怎么优化
 // https://www.cnblogs.com/grandyang/p/4620012.html  : 重新设计BST的结构
-// https://leetcode.com/problems/kth-smallest-element-in-a-bst/solution/  : 使用LRU
 template <class T>
 T kthSmallest(BinaryNode<T> *root, int k) {
     // @fixme: should return invalid number, e.g. T==int, Return numeric_limits<long>::min()
@@ -691,6 +644,7 @@ bool isSameNonRecursive(BinaryNode<T> *p, BinaryNode<T> *q) {
 }
 
 // https://www.cnblogs.com/grandyang/p/4051715.html
+// 判断一颗二叉树是否对称
 template <class T>
 T isSymmetricBinaryTree(BinaryNode<T> *p, BinaryNode<T> *q) {
     if (!p && !q) return true;
@@ -706,6 +660,7 @@ bool isSymmetric(BinaryNode<T> *root) {
     return isSymmetricBinaryTree(root->left, root->right);
 }
 
+// BFS
 template <class T>
 bool isSymmetricNonRecursive(BinaryNode<T> *root) {
 	if(!root) return true;
@@ -718,24 +673,13 @@ bool isSymmetricNonRecursive(BinaryNode<T> *root) {
         auto cur2 = Q2.front(); Q2.pop();
         if(!cur1 && !cur2) continue;
         if ((cur1 && !cur2) || (!cur1 && cur2) || (cur1->data != cur2->data)) return false;
+        // 对称 画图理解
         Q1.push(cur1->left);
         Q1.push(cur1->right);
         Q2.push(cur2->right);
         Q2.push(cur2->left);
 	}
     return true;
-}
-
-// https://www.cnblogs.com/grandyang/p/4295245.html
-// 想到利用AVL树 平衡的性质 但是太难了
-template <class T>
-BinaryNode<T>* sortedArrayToBST(vector<T>& nums, size_t lo, size_t hi) {
-    if(lo >= hi) return nullptr;
-    auto mid = (hi-lo)/2 + lo;
-    BinaryNode<T> * root = new BinaryNode<T>(nums[mid]);
-    root->left = sortedArrayToBST(nums, lo, mid);
-    root->right = sortedArrayToBST(nums, mid+1, hi);
-    return root;
 }
 
 namespace {
@@ -745,31 +689,6 @@ namespace {
         ListNode *next;
         ListNode(T x) : val(x), next(nullptr) {}
     };
-}
-
-// https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/
-// 递归版本的时间复杂度 (数组)  值得复习
-// 方法二: 将链表转换成数组 这样不用每次计算中间节点
-template <class T>
-BinaryNode<T>* sortedListToBST(ListNode<T>* head) {
-    if (!head) return nullptr;            // 无节点
-    if (!head->next) return new BinaryNode<T>{head->val};  // 只有一个节点
-    auto fast = head, slow = head;
-    auto last = slow;
-    while(fast->next && fast->next->next) {
-        last = slow;
-        slow = slow->next;
-        fast = fast->next->next;
-    }
-    // 可以认为slow处于中点处, 断开链表
-    fast = slow->next;
-    last->next = nullptr;
-
-    BinaryNode<T> * root = new BinaryNode<T>(slow->val);
-    if(slow != head)
-        root->left = sortedListToBST(head);
-    root->right = sortedListToBST(fast);
-    return root;
 }
 
 // 方法三:
@@ -788,9 +707,6 @@ bool hasPathSum(BinaryNode<T>* root, T sum) {
     return hasPathSum(root->left, sum - root->data) || hasPathSum(root->right, sum - root->data);
 }
 
-// 找到所有可能的路径
-// 可以理解为一个棋盘
-// @TODO DFS + DP
 template <class T>
 vector<vector<T>> PathSum(BinaryNode<T>* root, T sum) {
     vector<vector<T> > paths;
@@ -813,8 +729,9 @@ void findPaths(BinaryNode<T>* root, T sum, vector<T>& path, vector<vector<T> > p
     path.pop_back();
 }
 
+namespace sol_114 {
 // https://www.cnblogs.com/grandyang/p/4293853.html
-// 二叉树 按照前序的方式 生成链表(bottom up)
+// 二叉树 按照前序遍历的方式 生成链表(bottom up)
 template <class T>
 void flatten(BinaryNode<T>* root) {
     // 异常
@@ -857,6 +774,7 @@ void flatten_morris(BinaryNode<T> *root) {
         cur = cur->right;
     }
     return res;
+}
 }
 
 int main() {

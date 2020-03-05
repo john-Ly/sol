@@ -3,6 +3,13 @@ using namespace std;
 
 // https://www.cnblogs.com/grandyang/p/4128461.html
 
+// 4. 如何判断两个无环单链表是否有交点?如何找到第一个相交的点
+//    时间复杂度为O(M+N) 额外空间复杂度O(1)
+//  思路a: 使用hash表
+//      先遍历一个链表 记录hash<ListNode*> 再遍历第二个链表有重复即为第一个交点
+//  思路b: 遍历
+//      遍历两个链表 统计各自的长度len1 len2
+//      长链表先走abs(len1-len2), 然后两个链表同步走 相交再相同的点
 struct ListNode {
     int val;
     ListNode *next;
