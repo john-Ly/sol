@@ -777,6 +777,18 @@ void flatten_morris(BinaryNode<T> *root) {
 }
 }
 
+namespace mirror_binary_tree {
+// https://cuijiahua.com/blog/2017/12/basis_18.html
+void Mirror(TreeNode *root) {
+    if((!root) || (!root->left && !root->right)) return;
+
+    std::swap(root->left, root->right);
+    if(root->left) Mirror(root->left);
+    if(root->right) Mirror(root->right);
+}
+
+}
+
 int main() {
 	/* BST
 	            M

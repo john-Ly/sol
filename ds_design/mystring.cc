@@ -4,7 +4,7 @@
 using namespace std;
 
 // 可以考虑unique_ptr进行精简
-
+  
 // value-based
 class mystr {
 private:

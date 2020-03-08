@@ -4,7 +4,10 @@
 #include <cassert>
 
 // http://www.cppblog.com/zenliang/articles/131782.html
-
+// 
+// https://web.archive.org/web/20170424012703/http://jeremybai.github.io/blog/2014/09/05/memcpy
+// https://web.archive.org/web/20180216163343/http://jeremybai.github.io/blog/2014/09/10/size-t
+  
 // memcpy函数，如果内存重叠则报错  --> src指向内容 不能修改
 void* memcpy(void* dst, const void* src, size_t count) {
     assert(dst!= nullptr && src != nullptr);  // non-ptr
