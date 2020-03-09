@@ -47,7 +47,15 @@ ListNode* deleteDuplicates_wo(ListNode* head) {
         }
 
         if (cur == pre->next) pre = pre->next;
-        else pre->next = cur->next;
+        else {
+            while(pre->next != cur->next) {
+                auto old = pre->next;
+                pre->next = old->next;
+                delete old;
+            }
+            // 退出循环后
+            pre->next = cur->next;
+        }
     }
     return dummy.next;
 }

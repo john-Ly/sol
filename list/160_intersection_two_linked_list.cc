@@ -43,7 +43,14 @@ int getLength(ListNode* head) {
 }
 
 // 无论是否有交点 都可以假设相交(NULL也可以看成共同的交点)
-// 保证长链表跟短链表  相同成长度处遍历即可
+// 保证长链表跟短链表  相同长度处遍历即可
+// 画图好理解
+//  | a | b | c |  <= list1
+//      | b | c |  <= list2
+//
+//  短链表 先走完 b+c
+//  长链表 再走完 a  --  a+b+c
+//  最后两个变量都走到了 b处  最后遍历即可
 ListNode *getIntersectionNode1(ListNode *headA, ListNode *headB) {
     if (!headA || !headB) return NULL;
     ListNode *a = headA, *b = headB;

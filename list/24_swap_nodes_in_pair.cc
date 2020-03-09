@@ -15,9 +15,12 @@ struct ListNode {
     ListNode(int x) : val(x), next(NULL) {}
 };
 
+// swap pair list
 ListNode* swapPairs(ListNode* head) {
-    ListNode *dummy = new ListNode(-1), *pre = dummy;
-    dummy->next = head;
+    ListNode dummy {-1};
+    dummy.next = head;
+    ListNode* pre = &dummy;
+
     while (pre->next && pre->next->next) {
         // pre指向 pair_node的前面
         ListNode *n1 = pre->next;
@@ -29,5 +32,5 @@ ListNode* swapPairs(ListNode* head) {
 
         pre = n1;
     }
-    return dummy->next;
+    return dummy.next;
 }

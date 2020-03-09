@@ -7,7 +7,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
 };
 
-// 大整数相加
+// add list92
 namespace sol_2 {
 // http://www.cnblogs.com/grandyang/p/4129891.html
 // 接收的链表的低位放第一个节点(逆序成)小端模式)
@@ -66,7 +66,7 @@ ListNode* addTwoNumbers_bigEndian(ListNode* l1, ListNode* l2) {
 
 }
 
-// 反转单链表
+// rever list206
 namespace sol_206 {
 // ListNode dummy {-1};
 // while (head) {
@@ -107,30 +107,107 @@ ListNode* reverseList_recursive(ListNode* head) {
 }
 }
 
+// revers range list92
 namespace sol_92 {
 // https://leetcode.com/problems/reverse-linked-list-ii/solution/
 //  Input: 1->2->3->4->5->NULL, m = 2, n = 4
 // Output: 1->4->3->2->5->NULL
 // 不是常规逻辑的反转, 可能反转部分(链变被分为三个部分)
+// ListNode* reverseBetween(ListNode* head, int m, int n) {
+//     ListNode dummy {-1};
+//     dummy.next = head;
+//     ListNode* pre = &dummy;
+
+//     for (int i = 0; i < m - 1; ++i) pre = pre->next;
+//     auto cur = pre->next;
+
+//     // 相当于变换三个结点( 1-> 2 -> 3  :  2要接管3后面的结点)
+//     for (int i = m; i < n; ++i) {
+//         // 遍历结束后 cur_next指向了第三个节点
+//         auto t = cur->next;
+//         cur->next = t->next;
+//         // 头插法 可以生成逆序的链表
+//         t->next = pre->next;
+
+//         pre->next = t;
+//     }
+//     return dummy.next;
+// }
+}
+
+// reverse group list25
+namespace sol_25 {
+
+// https://leetcode.com/problems/reverse-nodes-in-k-group/discuss/11440/Non-recursive-Java-solution-and-idea
+ListNode* reverseKGroup(ListNode* head, int k) {
+    if (!head || head->next==nullptr || k == 1) return head;
+    ListNode dummy {-1};
+    dummy.next = head;
+    ListNode* pre = &dummy;
+    auto cur = head;
+
+    for (int i = 1; cur; ++i) {
+        if (i % k == 0) {
+            pre = reverseRange(pre, cur->next);
+            cur = pre->next;
+        } else {
+            cur = cur->next;
+        }
+    }
+    return dummy.next;
+}
+
+// best
 ListNode* reverseBetween(ListNode* head, int m, int n) {
     ListNode dummy {-1};
     dummy.next = head;
     ListNode* pre = &dummy;
 
-    for (int i = 0; i < m - 1; ++i) pre = pre->next;
+    for (int i = 0; i < m-1; ++i) pre = pre->next;
     auto cur = pre->next;
-
-    // 相当于变换三个结点( 1-> 2 -> 3  :  2要接管3后面的结点)
-    for (int i = m; i < n; ++i) {
-        // 遍历结束后 cur_next指向了第三个节点
-        auto t = cur->next;
-        cur->next = t->next;
-        // 头插法 可以生成逆序的链表
-        t->next = pre->next;
-
-        pre->next = t;
+    auto first = cur;
+    for (int i=m; i <= n; ++i) {
+        auto next = cur->next;
+        cur->next = pre->next;
+        pre->next = cur;
+        cur = next;
     }
+    first->next = cur;
     return dummy.next;
 }
 
+
+/**
+* Reverse a link list between begin and end exclusively
+* an example:
+* a linked list:
+* 0->1->2->3->4->5->6
+* |           |
+* begin       end
+* after call begin = reverse(begin, end)
+*
+* 0->3->2->1->4->5->6
+*          |  |
+*      begin end
+* @return the reversed list's 'begin' node, which is the precedence of node end
+*/
+
+// both open (begin, end)
+ListNode* reverseRange(ListNode* begin, ListNode* end) {
+    ListNode *cur = begin->next;
+    ListNode *first = cur;
+    ListNode *prev = begin;
+
+    // 头插法
+    ListNode *next=nullptr;
+    while (cur!=end){
+        next = cur->next;
+        cur->next = prev->next;
+        prev->next = cur;
+        cur = next;
+    }
+
+    first->next = end;
+    return first;
+}
 }

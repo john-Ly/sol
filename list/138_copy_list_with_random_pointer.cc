@@ -71,10 +71,11 @@ public:
         }
         // 1(2) -> 1(null) -> 2(3) -> 2(null) -> 3(1) -> 3(null)
 
+        // 2. 深拷贝
         cur = head;
         while (cur) {
             // cur->random表示随机指针指向的节点 但是深拷贝要指向新的节点 所以next
-            // cur->random->next
+            // cur->random->next 就是之前新加的随机点
             if (cur->random) cur->next->random = cur->random->next;
             cur = cur->next->next;
         }

@@ -1,5 +1,4 @@
 #include <iostream>
-// #include <stack>
 
 ListNode* temp;
 bool isPalindrome(ListNode* head) {
@@ -8,13 +7,13 @@ bool isPalindrome(ListNode* head) {
 }
 
 bool check(ListNode* p) {
-    if (NULL == p) return true;
+    if (nullptr == p) return true;
     bool isPal = check(p->next) & (temp->val == p->val);
     temp = temp->next;
     return isPal;
 }
 
-
+// 回文
 bool isPalindrome(ListNode* head) {
     // 只有0/1个节点的情况
     if (!head || !head->next) return true;
@@ -44,6 +43,4 @@ bool isPalindrome(ListNode* head) {
     }
 
     return true;
-    // 总结点奇数  n_pre + 1 = n_head
-    // 总结点偶数  n_pre = n_head
 }

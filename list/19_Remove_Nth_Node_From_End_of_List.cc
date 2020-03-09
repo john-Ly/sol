@@ -65,6 +65,7 @@ ListNode* removeNthFromEnd2(ListNode* head, int n) {
 namespace sol_203 {
 // 27: https://www.cnblogs.com/grandyang/p/4606700.html
 // 数组删除 指定元素(双指针即可)
+// remove list
 int removeElement(vector<int>& nums, int val) {
     // res相当于新的下标
     int res = 0;

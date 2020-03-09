@@ -11,6 +11,7 @@ struct ListNode {
 //  Given 1->2->3->4->5->NULL and k = 2,
 // return 4->5->1->2->3->NULL.
 
+// rotate list61
 // 链变形成环十分方便 所以rotate 简单
 ListNode *rotateRight(ListNode *head, int k) {
     if (!head) return NULL;

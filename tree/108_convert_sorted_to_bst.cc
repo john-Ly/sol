@@ -29,7 +29,7 @@ public:
     }
 };
 
-// 有序数组转换为BST
+// 有序链表转换为BST
 // https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/solution/
 class sol_109 {
 public:

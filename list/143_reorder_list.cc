@@ -30,6 +30,8 @@ struct ListNode {
 //   slow指向中间结点 fast可能会指向nullptr(偶数) + 最后一个(奇数)
 
 // https://www.cnblogs.com/grandyang/p/4254860.html
+
+// cross list
 void reorderList(ListNode* head) {
     //  只有两个节点的情况
     if (!head || !head->next || !head->next->next) return;

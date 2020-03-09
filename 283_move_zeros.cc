@@ -3,7 +3,6 @@
 using namespace std;
 
 // https://leetcode.com/problems/move-zeroes/solution/
-// 快慢指针
 
 void moveZeroes(vector<int>& nums) {
     int lastNonZero = 0;
@@ -30,13 +29,12 @@ void pv(vector<int>& v) {
 //     1. slow_pointer之前 的元素全部是 non-zero
 //     2. slow_pointer和fast_pointer之间 全是zero
 // fast快于slow 所以fast遇到non-zero就交换到slow之前了 所以成立
+// partition283
 void moveZeroes(vector<int>& nums) {
     for (int i = 0, j = 0; i < nums.size(); ++i) {
-        // cout << i << '-' << j << ": ";
         if (nums[i]) {
             swap(nums[i], nums[j++]);
         }
-        // pv(nums);
     }
 }
 
@@ -51,6 +49,7 @@ void moveEvens(vector<int>& nums) {
     }
 }
 
+// 快慢指针 占用太多内存
 void reOrderArray(vector<int> &array) {
     deque<int> result;
     int num = array.size();
