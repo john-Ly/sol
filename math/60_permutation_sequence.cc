@@ -15,6 +15,7 @@ The logic is as follows:
  We keep doing this until n reaches 0, then we get n numbers permutations that is kth.
 */
 
+// @SEE 31
 // 有点像页表的索引
 // 默认n 是1-9的范围 全排列也就9!
 string getPermutation(int n, int k) {

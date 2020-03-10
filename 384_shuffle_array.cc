@@ -6,9 +6,9 @@ using namespace std;
 // topic: 蓄水池算法(采样)
 // 概率抽样
 // 10TB的日志, 等概率随机抽取k条日志 采样
-https://zhuanlan.zhihu.com/p/29178293  详细的公式证明
-https://leetcode.com/problems/linked-list-random-node/discuss/85659/Brief-explanation-for-Reservoir-Sampling
-https://github.com/linghuazaii/blog/wiki/%5BAlgorithm%5D%E7%99%BE%E5%BA%A6%EF%BC%9A%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7
+// https://zhuanlan.zhihu.com/p/29178293  详细的公式证明
+// https://leetcode.com/problems/linked-list-random-node/discuss/85659/Brief-explanation-for-Reservoir-Sampling
+// https://github.com/linghuazaii/blog/wiki/%5BAlgorithm%5D%E7%99%BE%E5%BA%A6%EF%BC%9A%E8%93%84%E6%B0%B4%E6%B1%A0%E6%8A%BD%E6%A0%B7
 
 namespace {
 vector<int> ReservoirSampling(vector<int>& results, vector<int>& nums, int k) {

@@ -50,9 +50,24 @@ bool isPalindrome(string s) {
     return true;
 }
 
+namespace sol_266 {
+
+// 字符串的某个排列是否包含回文
+bool canPermutePalindrome(string s) {
+    unordered_map<char, int> m;
+    int cnt = 0;
+    for (auto a : s) ++m[a];
+    for (auto a : m) {
+        if (a.second % 2 != 0) ++cnt;
+    }
+    // 偶数个字符       奇数个字符
+    return cnt == 0 || (s.size()%2 != 0 && cnt == 1);
+}
+}
+
 int main () {
     /*
-    string s = "0pPp"; 
+    string s = "0pPp";
     cout << equal(s[0], s[1]) << endl;
     cout << equal(s[2], s[1]) << endl;
     cout << equal(s[3], s[1]) << endl;

@@ -6,8 +6,9 @@
 #include <bits/stdc++.h>
 
 // 快速输出一个数组
+#include <iterator>
 std::copy(v.begin(), v.end(),
-          std::ostream_iterator<int>(cout, ','));
+        std::ostream_iterator<int>(cout, ","));
 cout << endl;
 
 
