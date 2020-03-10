@@ -7,13 +7,7 @@ using namespace std;
 // https://www.cnblogs.com/grandyang/p/4305572.html
 // 1. 只要遇到字符串的子序列或配准问题首先考虑动态规划DP
 // 2. 只要遇到需要求出所有可能情况首先考虑用递归。 (暴搜)
-
 // https://www.cnblogs.com/grandyang/p/6185339.html
-
-// @TODO 可以利用递归来做  暂时放下
-bool is_valid_recursive(string s, int rest) {
-    // 分成4个子问题 然后每一个子问题的结果在组合起来( true && true && true && true )
-}
 
 /*
 IPv4:
@@ -30,11 +24,19 @@ IPv6:
 https://leetcode.com/problems/validate-ip-address/discuss/95552/My-Straightforward-C%2B%2B-Solution
 */
 
-// @TODO string有一些常用的函数需要查表
-// string:   find() + find_if()
-// getline(stream, str, del)
+// ip地址转换为4字节无符号整数
+unsigned int ipstr_ipint(string ip) {
+    unsigned int x = 0;
+    stringstream ss(ip);
+    string t;
+    while (getline(ss, t, '.')) {
+        x = x*256 + stoi(t);
+    }
+    return x;
+}
+
 string validIPAddress(string IP) {
-    istringstream is(IP);
+    stringstream is(IP);
     string t = "";
     int cnt = 0;
     if (IP.find(':') == string::npos) { // Check IPv4
@@ -42,7 +44,7 @@ string validIPAddress(string IP) {
         for(string t; getline(is, t, '.'); cnt++) {
             if (cnt > 4 || t.empty() || (t.size() > 1 && t[0] == '0') || t.size() > 3) return "Neither";
             for (char c : t) {
-                if (c < '0' || c > '9') return "Neither";
+                if (c < '0' || c > '9') return "Neither"
             }
             int val = stoi(t);
             if (val < 0 || val > 255) return "Neither";
@@ -60,7 +62,9 @@ string validIPAddress(string IP) {
     }
 }
 
-
+// 动态规划题目
+// "25525511135"  找出所有可能的string类型
+// ["255.255.11.135", "255.255.111.35"]
 vector<string> restoreIpAddresses(string s) {
     vector<string> res;
     restore(s, 4, "", res);
@@ -88,4 +92,30 @@ bool isValid(string s) {
     if (s.empty() || s.size() > 3 || (s.size() > 1 && s[0] == '0')) return false;
     int res = stoi(s);
     return res <= 255 && res >= 0;
+}
+
+
+// 从IP中找出 对应的省份号码(IP 地址 反映天气)
+struct IPrange {
+    // 左闭右闭
+    uint32_t startIp;
+    uint32_t endIp;
+    int value;  代表省份的号码
+
+    bool operator<(const IPrange& rhs) const { return startIp < rhs.startIp; }
+}
+
+int findIpValue(const vector<IPrange>& ranges, uint32_t ip) {
+    int res = -1;
+    if (!ranges.empty()) {
+        IPrange target {ip, 0, 0};
+        auto it = std::lower_bound(ranges.begin(), ranges.end(), target);
+        if (it == ranges.end()) --it;
+        else if (it != ranges.begin() && it->startIp > ip) --it;
+
+        if (it->startIp <= ip && it->endIp >= ip) {
+            res = it->value;
+        }
+    }
+    return res;
 }

@@ -42,6 +42,24 @@ int myatoi2(string str) {
     return base * sign;
 }
 
+// int -2147483648	2147483647
+string itos(int value) {
+  static const char digits[] = "9876543210123456789";
+  static const char* zero = digits + 9;
+  int i = value;
+  string res;
+
+  do {
+    int lsd = i%10;
+    i /= 10;
+    res += zero[lsd];
+  } while (i != 0);
+  if (value < 0) res += '-';
+  std::reverse(res.begin(), res.end());
+
+  return res;
+}
+
 /*
 1. scanf 针对 字符串指针 数组
   stackoverflow 方法:

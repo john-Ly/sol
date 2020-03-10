@@ -6,6 +6,48 @@ using namespace std;
 
 // meeting room 区间范围的比较
 // @SEE dp/activity.cc  贪心选择会议室
+namespace meeting {
+// topic: 题型1 一间办公室最多能有多少个会议可以举行
+// O(nlgn) 排序+ O(n)
+int minMeetingRooms(vector<Interval>& intervals) {
+    // 按照会议结束时间进行排序
+    sort(intervals.begin(), intervals.end(),
+         [](const auto& a, const auto& b)
+             {return a.end < b.end;});
+
+	// lastFinished:
+    // 下一个会议可开始的最早的时间(集合中最后一个会议的结束时间)
+    // 初始会议结束时间为0/INT_MIN
+	int lastFinished = 0, selected = 0;
+	for(int i=0; i<intervals.size(); ++i) {
+		int start = intervals[i].first, end = intervals[i].second;
+		if(lastFinished <= start) {
+			lastFinished = end;
+			++selected;
+		}
+	}
+	return selected;
+}
+
+// topic: 题型2 需要多少办公室最 开完所有会议 (两种题型一致)
+// https://www.cnblogs.com/grandyang/p/5244720.html#3964421
+int minMeetingRooms(vector<Interval>& intervals) {
+    sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b)
+                                               {return a.end < b.end;});
+
+    // 最小堆 按照会议结束时间 room
+    priority_queue<int, vector<int>, greater<int>> q;
+
+    for (auto a : intervals) {
+        // 当前会议可以和queue中的一个会议 共用一个房间(因为该会议的开始 > 结束)
+        // 每次都用结束会议最小的来比较  贪心 (如果可以开会, 剔除这个 更新新的会议的结束时间)
+        if (!q.empty() && q.top() <= a.start) q.pop();
+        q.push(a.end);
+    }
+
+    return q.size();
+}
+}
 
 // @TODO range module 设计
 // https://leetcode.com/problems/range-module/

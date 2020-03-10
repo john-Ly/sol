@@ -87,6 +87,23 @@ container.erase( std::remove(range, value), end()  )
 
 删除空格
 std::unique(range, BinaryPredicate) 删除连续相同的元素 只保留第一个
+
+#+begin_src c++
+void removeContinuousSpace(std::string& s) {
+  auto last = std::unique(s.begin(), s.end(), [](char a, char b) {return a == ' ' && b == ' '; });
+  s.erase(last, s.end());
+}
+
+for (int i=0, j=0; i<s.size()-1; ++i) {
+  if (s[i] != ' ') s[j++] = s[i];
+  else if (s[i] == s[i+1]) {
+    while (i<s.size()-1 && s[i+1] == ' ') ++i;
+    ++j;
+  }
+}
+
+
+#+end_src
 * transform
 trasform(range, std::back_inserter(results), f)
 for each x in range, f(x) output into results

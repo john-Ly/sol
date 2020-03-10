@@ -5,6 +5,12 @@
 // 包含所有头文件
 #include <bits/stdc++.h>
 
+// 快速输出一个数组
+std::copy(v.begin(), v.end(),
+          std::ostream_iterator<int>(cout, ','));
+cout << endl;
+
+
 #include <iostream>
 using namespace std;
 

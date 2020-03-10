@@ -41,7 +41,6 @@ int schedule() {
 	for(int i=0; i<order.size(); ++i) {
 		int meetingstart = order[i].second, meetingfinish = order[i].first;
 		if(lastFinished <= meetingstart) {
-			// 把earliest刷新到最后一个会议结束的时间
 			lastFinished = meetingfinish;
 			++selected;
 			cout << i << " ";
@@ -156,7 +155,8 @@ bool canAttendMeetings(vector<Interval>& intervals) {
 // 排序之后比较即可
 bool canAttendMeetings2(vector<Interval>& intervals) {
     // 按照会议起始时间升序
-    sort(intervals.begin(), intervals.end(), [](const Interval &a, const Interval &b){return a.start < b.start;});
+    sort(intervals.begin(), intervals.end(),
+                 [](const Interval &a, const Interval &b){return a.start < b.start;});
     for (int i = 1; i < intervals.size(); ++i) {
         if (intervals[i].start < intervals[i - 1].end) {
             return false;

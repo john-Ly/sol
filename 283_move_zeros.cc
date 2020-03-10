@@ -38,6 +38,13 @@ void moveZeroes(vector<int>& nums) {
     }
 }
 
+void foo(vector<int>& nums) {
+    // 满足条件的放在序列的前面 返回第一个不满足
+    auto it = std::partition(nums.begin(), nums.end(), [](int x) { return x%2 != 0;});
+    auto it = std::stable_partition(nums.begin(), nums.end(), [](int x) { return x%2 != 0;});
+
+}
+
 // 奇数排在前面 偶数排在后面 但是顺序变换了
 void moveEvens(vector<int>& nums) {
     for (int i = 0, j = 0; i < nums.size(); ++i) {
@@ -49,7 +56,7 @@ void moveEvens(vector<int>& nums) {
     }
 }
 
-// 快慢指针 占用太多内存
+// 快慢指针 占用太多内存 (稳定序列)
 void reOrderArray(vector<int> &array) {
     deque<int> result;
     int num = array.size();
