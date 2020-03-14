@@ -16,12 +16,15 @@ using namespace std;
 // 判断mid是在 pivot左侧 还是右侧 @TODO 配图 + 和旋转数组 比较来看
 // https://www.cnblogs.com/grandyang/p/4325648.html
 // https://leetcode.com/problems/search-in-rotated-sorted-array/discuss/14436/Revised-Binary-Search/191339
+
+
+// @TODO 一定要和最右边比较
 int search(vector<int>& nums, int target) {
     int left = 0, right = nums.size() - 1;
     while (left <= right) {
         int mid = (right + left) / 2;
         if (nums[mid] == target) return mid;
-        if (nums[mid] < nums[right]) {// nums[mid] 在 pivot右边 右半段有序
+        if (nums[mid] < nums[right]) { // nums[mid] 在 pivot右边 右半段有序
             // if: 右半端 进行二分 else: 左半段
             if (nums[mid] < target && nums[right] >= target) left = mid + 1;
             else right = mid - 1;

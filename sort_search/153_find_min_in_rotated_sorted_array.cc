@@ -16,7 +16,6 @@ using namespace std;
 //     return num[0];
 // }
 
-// @TODO 二分查找 真的需要想明白
 // https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/discuss/48484/A-concise-solution-with-proof-in-the-comment
 int findMin(vector<int> &num) {
     int low = 0, high = num.size() - 1;

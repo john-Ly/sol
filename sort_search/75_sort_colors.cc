@@ -24,28 +24,15 @@ void sortColors(vector<int>& nums) {
     }
 }
 
-void sortColors3(vector<int>& nums) {
+// 荷兰国旗 (0 在左边; 1 在中间; 2 在右边)
+void sortColors2(vector<int>& nums) {
     int red = 0, blue = (int)nums.size() - 1;
     for (int i = 0; i <= blue; ++i) {
         if (nums[i] == 0) {
             swap(nums[i], nums[red++]);
         } else if (nums[i] == 2) {
+            // i 的遍历顺序递增, 后面的数没有参与比较 i--
             swap(nums[i--], nums[blue--]);
-        }
-    }
-}
-
-void sortColors2(vector<int>& nums) {
-    int left = 0, right = nums.size() - 1, cur = 0;
-    while (cur <= right) {
-        if (nums[cur] == 0) {
-            // cur之前遇到的数 只有0和1 所以++cur
-            swap(nums[cur++], nums[left++]);
-        } else if (nums[cur] == 2) {
-            // cur这是新替换的值 所以不需要cur++
-            swap(nums[cur], nums[right--]);
-        } else {
-            ++cur;
         }
     }
 }

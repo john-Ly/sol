@@ -94,15 +94,6 @@ void removeContinuousSpace(std::string& s) {
   s.erase(last, s.end());
 }
 
-for (int i=0, j=0; i<s.size()-1; ++i) {
-  if (s[i] != ' ') s[j++] = s[i];
-  else if (s[i] == s[i+1]) {
-    while (i<s.size()-1 && s[i+1] == ' ') ++i;
-    ++j;
-  }
-}
-
-
 #+end_src
 * transform
 trasform(range, std::back_inserter(results), f)
@@ -122,7 +113,7 @@ make_heap(range) 默认最大堆
 sort_heap(range)  把最大堆转化成sorted range
 
 pop_heap(range) 最大堆移动到最后一个
-push_heap()
+push_heap(range) 自动调整
 
 ** sort @TODO
 时间复杂度 各种排序算法的稳定性 

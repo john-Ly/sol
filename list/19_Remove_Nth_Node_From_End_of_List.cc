@@ -63,6 +63,30 @@ ListNode* removeNthFromEnd2(ListNode* head, int n) {
 }
 
 namespace sol_203 {
+// https://www.cnblogs.com/grandyang/p/4329128.html
+// sorted 去除重复(保留重复1个)  返回删除后数组长度
+int removeDuplicates1(vector<int>& nums) {
+    if (nums.empty()) return 0;
+    int pre = 0, cur = 0, n = nums.size();
+    while (cur < n) {
+        if (nums[pre] == nums[cur]) ++cur;
+        else nums[++pre] = nums[cur++];
+    }
+    return pre + 1;
+}
+
+// sorted 去除重复(保留重复2个)  返回删除后数组长度
+// **必须是sorted**
+int removeDuplicates2(vector<int>& nums) {
+    int i = 0;
+    for (int num : nums) {
+        if (i < 2 || num > nums[i-2]) {
+            nums[i++] = num;
+        }
+    }
+    return i;
+}
+
 // 27: https://www.cnblogs.com/grandyang/p/4606700.html
 // 数组删除 指定元素(双指针即可)
 // remove list

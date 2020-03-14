@@ -5,6 +5,8 @@
 #include <algorithm>
 using namespace std;
 
+//  最优问题: 最小值  初始值可以调整成INT_MAX
+
 template<class T>
 void printVector(vector<vector<T>> const &mat) {
     cout << "{\n";

@@ -2,23 +2,19 @@
 #include <stdlib.h> // atoi
 #include <limits.h> // INT_MAX
 
-//        min         max
-// int -2147483648	2147483647
-// @NOTE leetcode上的答案很经典
-//
-/*
-// Reversing an integer can be done similarly to reversing a string.
-// We want to repeatedly "pop" the last digit off of xx and "push" it to the back of the \text{rev}rev. In the end, \text{rev}rev will be the reverse of the xx.
-// To "pop" and "push" digits without the help of some auxiliary stack/array, we can use math.
-    //pop operation:
-    pop = x % 10;
-    x /= 10;
+ //         123  =>  321           passed!
+ //        -123  =>  -321          passed!
+ //        -100  =>  -1            passed!
+ //        1002  =>  2001          passed!
+ //  1463847412  =>  2147483641    passed!
+ // -2147447412  =>  -2147447412   passed!
+ //  2147447412  =>  2147447412    passed!
+ //  1000000003  =>  0             passed!
+ //  2147483647  =>  0             passed!
+ // -2147483648  =>  0             passed!
 
-    //push operation:
-    temp = rev * 10 + pop;
-    rev = temp;
-
-*/
+ //         123  =>  321           passed!
+ //  2147483642  =>  0
 
 int reverse(int x) {
     int y = 0;

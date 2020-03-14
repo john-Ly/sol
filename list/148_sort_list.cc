@@ -1,10 +1,9 @@
 #include <iostream>
+#include <vector>
 using namespace std;
-
 
 // https://www.cnblogs.com/grandyang/p/4606710.html
 // 分治法 把k个链表 分成两份 k/2个sorted lists
-// @TODO 归并排序 利用最小堆
 
 struct ListNode {
     int val;
@@ -60,7 +59,7 @@ ListNode* mergesortList(ListNode* head) {
     }
     pre->next = NULL;
 
-    return sol_merge_k_sorted::mergeTwoLists_iter(sortList(head), sortList(slow));
+    return sol_merge_k_sorted::mergeTwoLists_iter(mergesortList(head), mergesortList(slow));
 }
 
 // https://www.cnblogs.com/grandyang/p/4250107.html
@@ -83,3 +82,19 @@ ListNode* insertionSortList(ListNode* head) {
     return dummy.next;
 }
 
+namespace sol_88 {
+// https://www.cnblogs.com/grandyang/p/4059650.html
+
+// 两个有序数组 merge
+// m, n : 两个数组初始化时元素的个数
+void merge(vector<int>& nums1, int m, vector<int>& nums2, int n) {
+    int i = m - 1, j = n - 1, k = m + n - 1;
+    while (i >= 0 && j >= 0) {
+        if (nums1[i] > nums2[j]) nums1[k--] = nums1[i--];
+        else nums1[k--] = nums2[j--];
+    }
+    // 可能i也有剩余 不过是放在nums1数组中 所以可以不考虑
+    while (j >= 0) nums1[k--] = nums2[j--];
+}
+
+}

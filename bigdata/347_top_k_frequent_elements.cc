@@ -3,6 +3,7 @@
 #include <queue>
 #include <vector>
 #include <iterator>
+#include <algorithm>
 using namespace std;
 
 // topic: hash表 排序
@@ -39,19 +40,19 @@ namespace string_freq {
         return res;
     }
 
-    string frequencySort(string s) {
+    string frequencySort1(string s) {
         string res = s;
         unordered_map<char, int> m;
         for (char c : res) ++m[c];
         // order(freq, alphabet)
-        sort(s.begin(), s.end(), [&](char& a, char& b){
+        std::sort(s.begin(), s.end(), [&](char& a, char& b){
             return m[a] > m[b] || (m[a] == m[b] && a < b);
         });
         return s;
     }
 
     // 计数排序
-    string frequencySort(string s) {
+    string frequencySort2(string s) {
         string res;
         vector<string> v(s.size() + 1);
 
@@ -77,7 +78,6 @@ namespace string_freq {
 // uniq -c 采用计数器模式
 // sort r: reverse降序 按照n数字
 }
-
 
 // https://www.cnblogs.com/grandyang/p/5454125.html
 // https://www.cnblogs.com/grandyang/p/7689927.html
@@ -120,7 +120,7 @@ vector<int> topKFrequent_1(vector<int>& nums, int k) {
 //     return res;
 // }
 
-// 使用计数排序的变形
+// 使用计数排序的变形 (二维矩阵)
 vector<int> topKFrequent_2(vector<int>& nums, int k) {
     unordered_map<int, int> m;
     // 桶的个数 (最差情况 nums只有一个数 出现了size次)
@@ -132,8 +132,8 @@ vector<int> topKFrequent_2(vector<int>& nums, int k) {
         bucket[it.second].push_back(it.first);
     }
 
-    // 不可能会有0次的桶出现 @TODO
-    for (int i = nums.size(); i > 0; --i) {  // start: 最后一个桶
+    // 逆序输出即可
+    for (int i = nums.size(); i > 0; --i) {
         // @TODO 先估算当前桶全部+res.size <= k ==> 直接insert
         // >k 则要一个一个的添加 或者iterator
         for (int j = 0; j < bucket[i].size(); ++j) {
@@ -189,7 +189,7 @@ public:
     KthLargest(int k, vector<int> nums) : k_(k) {
         for (int num : nums) {
             q.push(num);
-            if (q.size() > k_) st.pop();
+            if (q.size() > k_) q.pop();
         }
     }
 
@@ -228,9 +228,9 @@ int findKthLargest(vector<int>& nums, int k) {
     int left = 0, right = nums.size() - 1;
     while (true) {
         int pos = partition(nums, left, right);
-        if (pos == k - 1) return nums[pos];
-        if (pos > k - 1) right = pos - 1;
-        else left = pos + 1;
+        if (pos == k-1) return nums[pos];
+        if (pos > k-1) right = pos-1;
+        else left = pos+1;
     }
 }
 }
@@ -271,7 +271,7 @@ void driver() {
 
 }
 
-int main( )
+int main()
 {
     quick_sort_sedgewich::driver();
     return 0;

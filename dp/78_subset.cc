@@ -16,58 +16,6 @@ void printVector(vector<vector<T>> const &mat) {
     cout << "}\n";
 }
 
-// combination m from n.  组合数
-namespace combination {
-//  n=4 先挑出 1, 求后三位
-//  for (int i=0; i<n; ++i) {
-//      for (int j=i+1; j<n; ++j) {
-//          for (int k=j+1; k<n; ++k) {
-//              for (int l=k+1; l<n; ++l) {
-//      cout << i << "-" << j << "-" << k << "-" << l << endl;
-// }}}}
-
-// n: 元素总数量
-// Picked: 已选元素的序号
-// toPick: 还需选择的元素数量; 为0 全部组合
-void pick(int n, int toPick, vector<int>& picked, vector<vector<int> >& res) {
-    if(toPick == 0) { res.push_back(picked); return; }
-    // 从1开始计数 (组合不能包含重复的项(之前已经选过了)+按顺序生成)
-    int smallest = picked.empty() ? 1 : picked.back() + 1;
-
-    for(int next=smallest; next<=n; ++next){
-        picked.push_back(next);
-        pick(n, picked, toPick-1);
-        picked.pop_back();
-    }
-}
-
-// 元素互不相同
-// 题型1(2的特例): 从[0, m-1] 选出 n个数   数的范围也是 [0, m-1]
-// 重复元素调用next_perm 就是组合combination
-
-// 题型2: 从数组(size=m)中 选出 n个数组合
-void combination_vector(vector<int>& v, int n) {
-    int m = v.size();
-    assert(n <= m);
-    std::vector<int> pick(m, 0);
-    for (int i=0; i<n; ++) pick[i] = 1;
-
-    int count = 0;
-    do
-    {
-        ++count;
-        for (auto i : pick) {
-            if (i)
-                std::cout << values[i] << ", ";
-        }
-        std::cout << std::endl;
-    } while (prev_permutation(pick.begin(), pic.end()));
-}
-
-// 题型3: 数组shuffle @TODO
-
-}
-
 // 选出集合 子集合的个数  幂集(不包括空集)
 namespace subset {
 // 集合的幂集 2^n个 包含空集合
